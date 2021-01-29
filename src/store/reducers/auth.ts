@@ -16,7 +16,7 @@ export default (state: IState = DEFAULT_STATE, action: any) => {
             return {
                 ...state,
                 isAuthenticated: !!Object.keys(action.user).length,
-                authData: action?.data,
+                user: action?.user,
             };
         case LOGOUT:
             localStorage.clear();

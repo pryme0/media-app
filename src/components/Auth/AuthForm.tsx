@@ -1,5 +1,10 @@
 import React, { useRef, useState } from "react";
-import { Button, FormControlLabel, Grid } from "@material-ui/core";
+import {
+    Button,
+    CircularProgress,
+    FormControlLabel,
+    Grid,
+} from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import { Checkbox } from "@material-ui/core";
 import { Form, useFormikContext } from "formik";
@@ -14,7 +19,7 @@ interface Props {
 const AuthForm = ({ isSignup }: Props) => {
     const classes = useStyles();
     const history = useHistory();
-    const { resetForm } = useFormikContext() ?? {};
+    const { resetForm, isSubmitting } = useFormikContext() ?? {};
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const handleShowPassword = () => {
@@ -97,7 +102,14 @@ const AuthForm = ({ isSignup }: Props) => {
                 color="primary"
                 className={classes.submit}
             >
-                {isSignup ? "Sign Up" : "Sign In"}
+                {isSubmitting ? (
+                    <CircularProgress
+                        style={{ height: "1.5rem", width: "1.5rem" }}
+                        color="inherit"
+                    />
+                ) : (
+                    <span>{isSignup ? "Sign Up" : "Sign In"}</span>
+                )}
             </Button>
             <Button
                 component={Link}

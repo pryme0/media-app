@@ -23,7 +23,7 @@ export const auth = (
         } else if (action.toUpperCase() === "SIGNUP") {
             localStorage.setItem("accessToken", accessToken);
         }
-        // console.log(data);
+        dispatch({ type: "auth", user });
         history.push("/");
     } catch (error) {
         console.log(error.response);

@@ -38,6 +38,9 @@ export default makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
         borderRadius: "5rem",
         background: "#2F80ED",
+        "&:hover": {
+            background: "#3a8efb",
+        },
     },
     linkButton: {
         fontSize: "11px",
