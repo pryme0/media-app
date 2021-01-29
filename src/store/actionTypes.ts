@@ -1,0 +1,8 @@
+export const AUTH = "AUTH";
+export const LOGOUT = "LOGOUT";
+
+// social accounts
+export const ADD_SOCIAL_ACCOUNT = "ADD_SOCIAL_ACCOUNT";
+export const DELETE_SOCIAL_ACCOUNT = "DELETE_SOCIAL_ACCOUNT";
+export const LOAD_SOCIAL_ACCOUNTS = "LOAD_SOCIAL_ACCOUNTS";
+export const GET_SOCIAL_ACCOUNT = "GET_SOCIAL_ACCOUNT";
