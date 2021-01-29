@@ -13,7 +13,6 @@ import { Hidden } from "@material-ui/core";
 import { faBars, faBell } from "@fortawesome/free-solid-svg-icons";
 import { useStyles } from "./styles/Layout.styles";
 import StyledMenu from "./StyledMenu";
-import { boolean } from "yup";
 import { FixMeLater } from "../../types";
 
 interface IProps {
@@ -89,13 +88,7 @@ interface IAppBarProps {
 }
 
 const AppBar = (props: IAppBarProps) => {
-    const {
-        open,
-        handleDrawerOpen,
-        handleMobileOpen,
-        mobileOpen,
-        user,
-    } = props;
+    const { open, handleMobileOpen, mobileOpen, user } = props;
     const classes = useStyles();
     return (
         <userContext.Provider value={user}>
