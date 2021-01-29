@@ -1,51 +1,66 @@
 import React from "react";
 import { Container, Paper, Typography } from "@material-ui/core";
 import * as Yup from "yup";
-import { Formik, Form, useFormikContext } from "formik";
+import { Formik } from "formik";
+import { useDispatch } from "react-redux";
+import { auth } from "../store/actions/auth";
 import AuthForm from "../components/Auth/AuthForm";
 import logoText from "../assets/icons/logo-text.svg";
 import useStyles from "../components/Auth/styles";
+import { useHistory } from "react-router-dom";
 
 interface Props {
     isSignup?: boolean;
 }
 
-const validateForm = (isSignup?: boolean | undefined | null) =>
-    Yup.object({
-        firstName: Yup.string()
-            .max(15, "Must be 15 characters or less")
-            .required("FirstName is required"),
-        lastName: Yup.string()
-            .max(20, "Must be 20 characters or less")
-            .required("Required"),
-        email: Yup.string()
-            .email("Email is invalid")
-            .required("Email is required"),
-        password: isSignup
-            ? Yup.string()
-                  .min(6, "Password must be at least 6 charaters")
-                  .required("Password is required")
-            : Yup.string().required("Password is required"),
-        confirmPassword: Yup.string()
-            .oneOf([Yup.ref("password"), null], "Password must match")
-            .required("Confirm password is required"),
-    });
+const validateSignup = Yup.object({
+    firstName: Yup.string()
+        .max(15, "Must be 15 characters or less")
+        .required("FirstName is required"),
+    lastName: Yup.string()
+        .max(20, "Must be 20 characters or less")
+        .required("Required"),
+    email: Yup.string().email("Email is invalid").required("Email is required"),
+    password: Yup.string()
+        .min(6, "Password must be at least 6 charaters")
+        .required("Password is required"),
+    confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Password must match")
+        .required("Confirm password is required"),
+});
+
+const validateLogin = Yup.object({
+    email: Yup.string().email("Email is invalid").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+});
+
+const initialValuesSignup = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+};
+
+const initialValuesLogin = {
+    email: "",
+    password: "",
+    rememberMe: true,
+};
 
 const Auth = ({ isSignup }: Props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const action = isSignup ? "signup" : "login";
 
     return (
         <Formik
-            initialValues={{
-                firstName: "",
-                lastName: "",
-                email: "",
-                password: "",
-                confirmPassword: "",
-            }}
-            validationSchema={validateForm(isSignup)}
+            initialValues={isSignup ? initialValuesSignup : initialValuesLogin}
+            validationSchema={isSignup ? validateSignup : validateLogin}
             onSubmit={(values) => {
                 console.log(values);
+                dispatch(auth(values, history, action));
             }}
         >
             <Container component="main" maxWidth="xs">

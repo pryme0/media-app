@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Checkbox } from "@material-ui/core";
 import { Form, useFormikContext } from "formik";
 import Input from "./Input";
+import CheckboxInput from "./CheckboxInput";
 import useStyles from "./styles";
 
 interface Props {
@@ -54,15 +55,9 @@ const AuthForm = ({ isSignup }: Props) => {
             </Grid>
             {!isSignup ? (
                 <Grid container justify="space-between">
-                    <FormControlLabel
-                        className={classes.remember}
-                        control={
-                            <Checkbox
-                                // checked={state.checkedB}
-                                name="checkedB"
-                                color="primary"
-                            />
-                        }
+                    <CheckboxInput
+                        color="primary"
+                        name="rememberMe"
                         label="Remember Me"
                     />
                     <Button

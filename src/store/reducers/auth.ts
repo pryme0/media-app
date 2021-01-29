@@ -13,10 +13,6 @@ interface IState {
 export default (state: IState = DEFAULT_STATE, action: any) => {
     switch (action.type) {
         case AUTH:
-            localStorage.setItem(
-                "accessToken",
-                JSON.stringify(action.accessToken)
-            );
             return {
                 ...state,
                 isAuthenticated: !!Object.keys(action.user).length,
