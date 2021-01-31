@@ -127,7 +127,7 @@ export const useStyles = makeStyles((theme) => ({
         "&:focus": {
             width: "30ch!important",
         },
-        fontSize: "1rem",
+        fontSize: ".8rem",
         padding: theme.spacing(0.7, 0, 0.7, 3),
         // vertical padding + font size from searchIcon
         paddingRight: `calc(1em + ${theme.spacing(4)}px)`,
@@ -138,13 +138,13 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     logo: {
-        padding: "1rem 0 5rem 1.3rem",
+        padding: "1rem 0 4rem 1.3rem",
     },
     // sidebar
     sidebar: {
         width: SIDEBAR_WIDTH,
         flexShrink: 0,
-
+        fontSize: "1.25rem",
         whiteSpace: "nowrap",
     },
     rightContent: {
@@ -155,6 +155,8 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: "white",
         minWidth: "auto !important",
         marginRight: theme.spacing(1),
+        fontSize: ".6rem",
+        height: "100%",
         // padding: `6px ${theme.spacing(1)}px`,
     },
     sidebarDrawerPaper: {

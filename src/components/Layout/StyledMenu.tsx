@@ -90,11 +90,11 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 export default function CustomizedMenus(props: { className: string }) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const classes = styles();
     const user: any = useContext(userContext);
 
-    const handleClick = (event: React.SetStateAction<any>) => {
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -118,7 +118,11 @@ export default function CustomizedMenus(props: { className: string }) {
             >
                 <Avatar
                     className={classes.avatar}
-                    alt="Remy Sharp"
+                    alt={user.username}
+                    style={{
+                        backgroundColor: "#2F80ED",
+                        fontWeight: "lighter",
+                    }}
                     src={user.profileImg ? user.profileImg : null}
                 >
                     {(user.username as string)[0].toUpperCase()}

@@ -18,9 +18,7 @@ export const auth = (
             formData
         );
         const { accessToken, user } = data;
-        if (isRemember) {
-            localStorage.setItem("accessToken", accessToken);
-        } else if (action.toUpperCase() === "SIGNUP") {
+        if (isRemember || action.toUpperCase() === "SIGNUP") {
             localStorage.setItem("accessToken", accessToken);
         }
         dispatch({ type: "auth", user });
