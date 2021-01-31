@@ -16,8 +16,8 @@ const Index = () => {
     return (
         <div className={classes.root}>
             <header className={classes.header}>
-                <Typography variant="h2">Main Dashboard</Typography>
-                <Typography variant="h6">
+                <Typography variant="h4">Main Dashboard</Typography>
+                <Typography variant="caption">
                     Welcome <span>Lizzy Onoja</span>, everything looks great!
                 </Typography>
             </header>

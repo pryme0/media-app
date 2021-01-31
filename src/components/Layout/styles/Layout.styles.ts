@@ -4,7 +4,6 @@ import { DRAWER_WIDTH, APPBAR_COLOR, SIDEBAR_WIDTH } from "./constants";
 export const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
-        fontSize: "20px",
     },
     drawerContainer: {},
     appBar: {
@@ -86,13 +85,13 @@ export const useStyles = makeStyles((theme) => ({
         // minWidth: "45px",
         // fontSize: "2rem",
         "& svg": {
-            fontSize: "2.7rem",
+            fontSize: "2.1rem",
             color: "white",
         },
     },
     listIconText: {
         "& span": {
-            fontSize: "1.5rem",
+            fontSize: "1rem",
         },
     },
     search: {
@@ -128,8 +127,8 @@ export const useStyles = makeStyles((theme) => ({
         "&:focus": {
             width: "30ch!important",
         },
-        fontSize: "1.2rem",
-        padding: theme.spacing(0, 0, 0, 3),
+        fontSize: "1rem",
+        padding: theme.spacing(0.7, 0, 0.7, 3),
         // vertical padding + font size from searchIcon
         paddingRight: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create("width"),
@@ -167,6 +166,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     navLink: {
         color: "white",
+        textDecoration: "none",
         "&:hover, &:focus": {
             textDecoration: "none",
             color: "white",

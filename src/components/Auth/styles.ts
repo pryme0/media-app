@@ -58,4 +58,14 @@ export default makeStyles((theme) => ({
             textDecoration: "none",
         },
     },
+    backButton: {
+        marginTop: theme.spacing(4),
+        "& a": {
+            textDecoration: "none",
+            color: "#2F80ED",   
+        },
+    },
+    backIcon: {
+        marginRight: theme.spacing(1),
+    },
 }));

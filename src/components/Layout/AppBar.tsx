@@ -91,7 +91,7 @@ const AppBar = (props: IAppBarProps) => {
     const { open, handleMobileOpen, mobileOpen, user } = props;
     const classes = useStyles();
     return (
-        <userContext.Provider value={user}>
+        <userContext.Provider value={{ username: "Santos Bright" }}>
             <Hidden smDown implementation="js">
                 <AppNavBar
                     position="fixed"
@@ -121,7 +121,7 @@ const AppBar = (props: IAppBarProps) => {
 };
 
 const mapStateToProps = (state: FixMeLater) => ({
-    user: state.currentUser.user,
+    user: state.auth.user,
 });
 
 export default connect(mapStateToProps)(AppBar);
