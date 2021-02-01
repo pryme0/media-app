@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
 import auth from "./auth";
-import socialAccount from "./socialAccounts";
+import socialAccounts from "./socialAccounts";
 
-export default combineReducers({ auth, socialAccount });
+export default combineReducers({ auth, socialAccounts });

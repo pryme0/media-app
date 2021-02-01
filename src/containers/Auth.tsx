@@ -30,6 +30,10 @@ const validateSignup = Yup.object({
     confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Password must match")
         .required("Confirm password is required"),
+    agreeToTerms: Yup.bool().oneOf(
+        [true],
+        "Accept Terms & Conditions is required"
+    ),
 });
 
 const validateLogin = Yup.object({
@@ -43,6 +47,7 @@ const initialValuesSignup = {
     email: "",
     password: "",
     confirmPassword: "",
+    agreeToTerms: false,
 };
 
 const initialValuesLogin = {

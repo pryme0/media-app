@@ -1,5 +1,5 @@
 import { Action, Dispatch } from "redux";
-import { apiCall } from "../../services/api";
+import { apiCall, setTokenHeader } from "../../services/api";
 import { FixMeLater } from "../../types";
 import { AUTH } from "../actionTypes";
 // import * as api from "../api/index.js";
@@ -21,6 +21,7 @@ export const auth = (
         if (isRemember || action.toUpperCase() === "SIGNUP") {
             localStorage.setItem("accessToken", accessToken);
         }
+        setTokenHeader(accessToken);
         dispatch({ type: "auth", user });
         history.push("/");
     } catch (error) {

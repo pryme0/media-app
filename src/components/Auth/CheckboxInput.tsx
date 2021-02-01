@@ -9,8 +9,9 @@ import {
 
 interface Props {
     name: string;
-    label: string;
+    label: string | JSX.Element;
     color: "primary" | "secondary" | "default" | undefined;
+    className?: string;
 }
 
 const CustomCheckbox = withStyles({

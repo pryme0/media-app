@@ -34,7 +34,7 @@ const DrawerContent = (props: IProps) => {
         <>
             <Divider />
             <div className={classes.logo}>
-                <NavLink to="/dashboard">
+                <NavLink to="/">
                     <img src={logo} alt="buzzroom logo" width="150" />
                 </NavLink>
             </div>
@@ -42,7 +42,7 @@ const DrawerContent = (props: IProps) => {
             <List>
                 <NavLink
                     exact
-                    to="/dashboard"
+                    to="/"
                     activeClassName={classes.activeNavLink}
                     className={classes.navLink}
                 >
@@ -57,7 +57,7 @@ const DrawerContent = (props: IProps) => {
                     </ListItem>
                 </NavLink>
                 <NavLink
-                    to="/dashboard/social-inbox"
+                    to="/social-inbox"
                     activeClassName={classes.activeNavLink}
                     className={classes.navLink}
                 >
@@ -72,7 +72,7 @@ const DrawerContent = (props: IProps) => {
                     </ListItem>
                 </NavLink>
                 <NavLink
-                    to="/dashboard/streams"
+                    to="/streams"
                     activeClassName={classes.activeNavLink}
                     className={classes.navLink}
                 >
@@ -87,7 +87,7 @@ const DrawerContent = (props: IProps) => {
                     </ListItem>
                 </NavLink>
                 <NavLink
-                    to="/dashboard/posts"
+                    to="/posts"
                     activeClassName={classes.activeNavLink}
                     className={classes.navLink}
                 >
@@ -102,7 +102,7 @@ const DrawerContent = (props: IProps) => {
                     </ListItem>
                 </NavLink>
                 <NavLink
-                    to="/dashboard/publisher"
+                    to="/publisher"
                     activeClassName={classes.activeNavLink}
                     className={classes.navLink}
                 >
@@ -117,7 +117,7 @@ const DrawerContent = (props: IProps) => {
                     </ListItem>
                 </NavLink>
                 <NavLink
-                    to="/dashboard/analytics"
+                    to="/analytics"
                     activeClassName={classes.activeNavLink}
                     className={classes.navLink}
                 >
@@ -132,7 +132,7 @@ const DrawerContent = (props: IProps) => {
                     </ListItem>
                 </NavLink>
                 <NavLink
-                    to="/dashboard/post-manager"
+                    to="/post-manager"
                     activeClassName={classes.activeNavLink}
                     className={classes.navLink}
                 >

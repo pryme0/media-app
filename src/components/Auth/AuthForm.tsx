@@ -75,15 +75,9 @@ const AuthForm = ({ isSignup }: Props) => {
                 </Grid>
             ) : (
                 <Grid container justify="flex-end">
-                    <FormControlLabel
-                        className={classes.remember}
-                        control={
-                            <Checkbox
-                                // checked={state.checkedB}
-                                name="checkedB"
-                                color="primary"
-                            />
-                        }
+                    <CheckboxInput
+                        color="primary"
+                        name="agreeToTerms"
                         label={
                             <span className={classes.label}>
                                 Agree to The{" "}
@@ -92,6 +86,7 @@ const AuthForm = ({ isSignup }: Props) => {
                                 </Link>
                             </span>
                         }
+                        className={classes.remember}
                     />
                 </Grid>
             )}

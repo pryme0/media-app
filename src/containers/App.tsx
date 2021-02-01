@@ -20,6 +20,7 @@ function App() {
                         render={() => <Auth isSignup={true} />}
                     />
                     <DashboardRoute exact component={Index} path="/" />
+                    <DashboardRoute exact component={Index} path="/streams" />
                 </Switch>
             </BrowserRouter>
         </Provider>
