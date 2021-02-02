@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import AppBar from "@material-ui/core/AppBar";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { getSocialAccounts } from "../../store/actions/socialAccounts";
 import TabPanel from "./Tabs/TabPanel";
 import { useStyles } from "./styles";
@@ -20,13 +20,13 @@ function a11yProps(index: any) {
 
 interface IProps {
     socialAccounts: FixMeLater[];
+    getSocialAccounts: () => any;
 }
 
-function Index(props: IProps) {
+function Index({ getSocialAccounts, socialAccounts }: IProps) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const [loading, setLoading] = useState(true);
-    const { socialAccounts } = props;
 
     useEffect(() => {
         getSocialAccounts();

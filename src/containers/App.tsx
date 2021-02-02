@@ -9,6 +9,7 @@ import Index from "../components/Index/Index";
 import Streams from "../components/Streams/Streams";
 import { setAuthorizationToken } from "../services/api";
 import { LOGOUT } from "../store/actionTypes";
+import { withAuth } from "../HOCS/withAuth";
 
 const store = configureStore();
 
@@ -39,6 +40,11 @@ function App() {
                     />
                     <DashboardRoute exact component={Index} path="/" />
                     <DashboardRoute exact component={Streams} path="/streams" />
+                    <Route
+                        exact
+                        path="/connect-social-one"
+                        component={withAuth(ConnectSocialStep2)}
+                    />
                 </Switch>
             </BrowserRouter>
         </Provider>
