@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import Auth from "./Auth";
 import { configureStore } from "../store";
 import DashboardRoute from "../components/DashboardRoute/DashboardRoute";
 import Index from "../components/Index/Index";
+import Streams from "../components/Streams/Streams";
+import { setAuthorizationToken } from "../services/api";
+import { LOGOUT } from "../store/actionTypes";
 
 const store = configureStore();
 
 function App() {
+    useEffect(() => {
+        if (localStorage.accessToken) {
+            setAuthorizationToken(localStorage.accessToken);
+            try {
+                store.dispatch({
+                    type: "AUTH",
+                    user: jwtDecode(localStorage.accessToken),
+                });
+            } catch (err) {
+                store.dispatch({ type: LOGOUT });
+            }
+        }
+    });
+
     return (
         <Provider store={store}>
             <BrowserRouter>
@@ -20,7 +38,7 @@ function App() {
                         render={() => <Auth isSignup={true} />}
                     />
                     <DashboardRoute exact component={Index} path="/" />
-                    <DashboardRoute exact component={Index} path="/streams" />
+                    <DashboardRoute exact component={Streams} path="/streams" />
                 </Switch>
             </BrowserRouter>
         </Provider>

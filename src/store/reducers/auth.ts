@@ -20,7 +20,7 @@ export default (state: IState = DEFAULT_STATE, action: any) => {
             };
         case LOGOUT:
             localStorage.clear();
-            return { ...state, authData: null };
+            return { ...state, user: {} };
         default:
             return state;
     }
