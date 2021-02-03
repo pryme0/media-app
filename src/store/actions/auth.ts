@@ -1,5 +1,6 @@
 import { Action, Dispatch } from "redux";
 import { apiCall, setAuthorizationToken } from "../../services/api";
+import { addError } from "redux-flash-messages";
 import { FixMeLater } from "../../types";
 import { AUTH } from "../actionTypes";
 // import * as api from "../api/index.js";
@@ -7,7 +8,8 @@ import { AUTH } from "../actionTypes";
 export const auth = (
     formData: FixMeLater,
     history: FixMeLater,
-    action: string
+    action: string,
+    actions: any
 ) => async (dispatch: Dispatch<Action>) => {
     try {
         const isRemember: boolean = formData.rememberMe;
@@ -23,8 +25,17 @@ export const auth = (
         }
         setAuthorizationToken(accessToken);
         dispatch({ type: AUTH, user });
+        if (action === "login")
+            addError({
+                text: `Welcome back ${user.firstname}`,
+                data: { tree: "house" },
+            });
         history.push("/");
     } catch (error) {
+        actions.setSubmitting(false);
+        addError({
+            text: error.response.data.error,
+        });
         console.log(error.response);
     }
 };

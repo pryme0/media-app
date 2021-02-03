@@ -66,9 +66,9 @@ const Auth = ({ isSignup }: Props) => {
         <Formik
             initialValues={isSignup ? initialValuesSignup : initialValuesLogin}
             validationSchema={isSignup ? validateSignup : validateLogin}
-            onSubmit={(values) => {
+            onSubmit={(values, actions) => {
                 console.log(values);
-                dispatch(auth(values, history, action));
+                dispatch(auth(values, history, action, actions));
             }}
         >
             <Container component="main" maxWidth="lg">

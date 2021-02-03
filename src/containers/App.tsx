@@ -9,7 +9,9 @@ import Index from "../components/Index/Index";
 import Streams from "../components/Streams/Streams";
 import { setAuthorizationToken } from "../services/api";
 import { LOGOUT } from "../store/actionTypes";
-import { withAuth } from "../HOCS/withAuth";
+import FlashMessage from "../components/FlashMessage/FlashMessage";
+import ConnectSocialStep from "../components/ConnectSocial/ConnectSocialStep";
+import withAuth from "../HOCS/withAuth";
 
 const store = configureStore();
 
@@ -31,6 +33,7 @@ function App() {
     return (
         <Provider store={store}>
             <BrowserRouter>
+                <FlashMessage />
                 <Switch>
                     <Route exact path="/signin" component={Auth} />
                     <Route
@@ -43,7 +46,7 @@ function App() {
                     <Route
                         exact
                         path="/connect-social-one"
-                        component={withAuth(ConnectSocialStep2)}
+                        component={ConnectSocialStep}
                     />
                 </Switch>
             </BrowserRouter>

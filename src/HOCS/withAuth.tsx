@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { FixMeLater } from "../types";
 
 interface IProps {
     isAuthenticated: boolean;
     history: any;
 }
 
-export default function withAuth(ComponentToBeRendered) {
+export default function withAuth(ComponentToBeRendered: FixMeLater) {
     class Authenticate extends Component<IProps> {
         componentDidMount() {
-            if (!this.props.isAuthenticated) {
-                this.props.history.push("/dashboard");
+            if (this.props.isAuthenticated === false) {
+                this.props.history.push("/signin");
             }
         }
 
@@ -19,9 +20,9 @@ export default function withAuth(ComponentToBeRendered) {
         }
     }
 
-    function mapStateToProps(state) {
+    function mapStateToProps(state: FixMeLater) {
         return {
-            isAuthenticated: state.currentUser.isAuthenticated,
+            isAuthenticated: state.auth.isAuthenticated,
         };
     }
 

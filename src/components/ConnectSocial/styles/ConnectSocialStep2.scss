@@ -3,36 +3,38 @@
     margin: 0;
     box-sizing: border-box;
 }
+.social-wrapper-background {
+    background: url("../../../assets/images/connect-social/connectsocial.png")
+        no-repeat center center/cover;
+    min-height: 100vh;
+}
 .social-wrapper {
     background-color: #fff;
-    padding: 3rem;
+    padding: 1.88rem;
     border-radius: 7px;
 }
 .social-connect-row {
-    background: url("../../../images/connect-social/connectsocial.png")
-        no-repeat center center/cover;
-    min-height: 50vh;
     justify-content: center;
     align-items: center;
     margin: auto;
     text-align: center;
-    padding: 5rem;
+    padding: 3.13rem;
 }
 .social-connect-text {
-    font-size: 4rem;
+    font-size: 2.5rem;
     font-weight: 700;
     letter-spacing: 2px;
 }
 @media only screen and (max-width: 640px) {
     .social-connect-text {
-        font-size: 2.5rem;
+        font-size: 1.56rem;
     }
     .social-connect-paragraph {
-        font-size: 1.3rem !important;
+        font-size: 0.83rem !important;
     }
 }
 .social-connect-paragraph {
-    font-size: 1.5rem;
+    font-size: 0.93rem;
     font-weight: 130;
     max-width: 70%;
     text-align: center;
@@ -40,18 +42,18 @@
     letter-spacing: 1.5px;
 }
 .connect-social-button-wrapper {
-    margin-top: 4rem;
+    margin-top: 2.5rem;
 }
 .connect-social-button-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 1rem;
+    padding: 0.63rem;
 }
 .social-facebook {
     background: #0077b6 !important;
-    font-size: 1.5rem !important;
+    font-size: 0.93rem !important;
     border: none !important;
 }
 @media only screen and (max-width: 640px) {
@@ -59,26 +61,26 @@
     .social-facebook,
     .social-twitter,
     .social-linkedin {
-        padding: 5px 6rem !important;
+        padding: 5px 3.75rem !important;
     }
     .social-twitter {
-        padding: 5px 6.3rem !important;
+        padding: 5px 4rem !important;
     }
     .instagram-ico {
-        padding: 5px 5.7rem !important;
+        padding: 5px 3.56rem !important;
     }
 }
 .social-twitter {
     background: #48cae4 !important;
-    font-size: 1.5rem !important;
+    font-size: 0.93rem !important;
     border: none !important;
-    margin-top: 1rem;
+    margin-top: 0.63rem;
 }
 .social-instagram {
     background: #d00000 !important;
-    font-size: 1.5rem !important;
+    font-size: 0.93rem !important;
     border: none !important;
-    margin-top: 1rem;
+    margin-top: 0.63rem;
 }
 @media only screen and (max-width: 640px) {
     .social-instagram {
@@ -86,15 +88,15 @@
 }
 .social-linkedin {
     background: #219ebc !important;
-    font-size: 1.5rem !important;
+    font-size: 0.93rem !important;
     border: none !important;
-    margin-top: 1rem;
+    margin-top: 0.63rem;
 }
 .steps {
-    font-size: 1.5rem;
+    font-size: 0.93rem;
     font-weight: 700;
     margin-top: 7px;
 }
 .social-icons {
-    margin: 0 2rem;
+    margin: 0 1.25rem;
 }

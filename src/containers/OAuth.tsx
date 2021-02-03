@@ -1,22 +1,22 @@
 import React, { Component } from "react";
-import { apiCall } from "../../services/api";
-import { API_URL } from "../../services/config";
+import { apiCall } from "../services/api";
+import { API_URL } from "../services/config";
 import { connect } from "react-redux";
 import Axios from "axios";
 import { Action, Dispatch } from "redux";
-import { FixMeLater } from "../../types";
+import { FixMeLater } from "../types";
+import { ADD_SOCIAL_ACCOUNT } from "../store/actionTypes";
 
 interface IProps {
     provider: FixMeLater;
     socket: FixMeLater;
     route: FixMeLater;
     history: FixMeLater;
-    setCurrentUser: () => any | void;
-    loadSocialAccounts: () => any | void;
+    addSocialAccount: any;
     // flash;
 }
 
-class OAuth extends Component<IProps, { disabled: boolean }> {
+class OAuth extends Component<FixMeLater, { disabled: boolean }> {
     state = { disabled: false };
     popup: FixMeLater;
 
@@ -46,22 +46,14 @@ class OAuth extends Component<IProps, { disabled: boolean }> {
     };
 
     startAuth = () => {
-        const {
-            provider,
-            socket,
-            route,
-            history,
-            setCurrentUser,
-            loadSocialAccounts,
-        } = this.props;
+        const { provider, socket, route, history } = this.props;
 
         socket.on(provider, (res: FixMeLater) => {
             try {
                 if (route === "") {
                     if (res.user === null)
                         throw res.data || "Something went wrong!";
-                    setCurrentUser(res.user);
-                    loadSocialAccounts(res.socialAccounts);
+                    this.props.addSocialAccount(res.socialAccounts);
                     history.push("/dashboard");
                     localStorage.setItem("accessToken", res.user.userTokens);
                 }
@@ -82,7 +74,7 @@ class OAuth extends Component<IProps, { disabled: boolean }> {
 
         if (!this.state.disabled) {
             this.popup = this.openPopup();
-
+            console.log(socket);
             Axios.defaults.headers.Authorization = localStorage.accessToken;
             Axios.get(
                 `${API_URL}/api/oauth${route}/${provider}?${provider}SocketId=${socket.id}`
@@ -105,12 +97,9 @@ class OAuth extends Component<IProps, { disabled: boolean }> {
     }
 }
 
-function mapDispatchToProps(dispatch: Dispatch<Action>) {
-    return {
-        setCurrentUser: (user: FixMeLater) => dispatch({ type: "AUTH", user }),
-        loadSocialAccounts: (socialAccounts: FixMeLater) =>
-            dispatch({ type: "LOAD_SOCIAL_ACCOUNTS", socialAccounts }),
-    };
-}
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+    addSocialAccount: (socialAccount: FixMeLater) =>
+        dispatch({ type: ADD_SOCIAL_ACCOUNT, socialAccount }),
+});
 
-export default connect(null, mapDispatchToProps)(OAuth);
+export default connect(mapDispatchToProps)(OAuth);

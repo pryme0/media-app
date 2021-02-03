@@ -29,7 +29,7 @@ function Index({ getSocialAccounts, socialAccounts }: IProps) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getSocialAccounts();
+        getSocialAccounts().then(() => console.log("Got streams"));
     }, []);
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {

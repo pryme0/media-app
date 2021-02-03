@@ -1,5 +1,6 @@
 import rootReducer from "./reducers";
 import { createStore, applyMiddleware, compose } from "redux";
+import { configureFlashMessages } from "redux-flash-messages";
 import thunk from "redux-thunk";
 
 declare global {
@@ -15,6 +16,11 @@ export function configureStore() {
         rootReducer,
         composeEnhancers(applyMiddleware(thunk))
     );
+
+    configureFlashMessages({
+        // The dispatch function for the Redux store.
+        dispatch: store.dispatch,
+    });
 
     return store;
 }
