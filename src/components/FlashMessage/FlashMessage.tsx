@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Snackbar } from "@material-ui/core";
+import { Snackbar, IconButton } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
+import { Cancel } from "@material-ui/icons";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { FixMeLater } from "../../types";
@@ -19,7 +20,8 @@ const FlashMessage = (props: Props) => {
     const messages = props.messages;
     const [open, setOpen] = useState(true);
 
-    const handleClose = () => {
+    const handleClose = (flashMessage: FlashMessageShape) => {
+        onFlashMessageClick(flashMessage);
         setOpen(false);
     };
 
@@ -28,11 +30,23 @@ const FlashMessage = (props: Props) => {
             <Snackbar
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 open={open}
-                onClick={() => onFlashMessageClick(message)}
                 key={message.id}
-                onClose={handleClose}
+                onClose={() => handleClose(message)}
                 message={message.text}
-            />
+                autoHideDuration={10000}
+            >
+                <Alert
+                    severity={message.type === "ERROR" ? "error" : "success"}
+                    variant="filled"
+                    action={
+                        <IconButton color="inherit" size="small">
+                            <Cancel />
+                        </IconButton>
+                    }
+                >
+                    {message.text}
+                </Alert>
+            </Snackbar>
         );
     };
 

@@ -1,6 +1,6 @@
 import { Action, Dispatch } from "redux";
 import { apiCall, setAuthorizationToken } from "../../services/api";
-import { addError } from "redux-flash-messages";
+import { addError, addSuccess } from "redux-flash-messages";
 import { FixMeLater } from "../../types";
 import { AUTH } from "../actionTypes";
 // import * as api from "../api/index.js";
@@ -26,9 +26,8 @@ export const auth = (
         setAuthorizationToken(accessToken);
         dispatch({ type: AUTH, user });
         if (action === "login")
-            addError({
+            addSuccess({
                 text: `Welcome back ${user.firstname}`,
-                data: { tree: "house" },
             });
         history.push("/");
     } catch (error) {
