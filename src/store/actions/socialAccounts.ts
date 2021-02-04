@@ -6,10 +6,11 @@ import {
     DELETE_SOCIAL_ACCOUNT,
 } from "../actionTypes";
 import { apiCall } from "../../services/api";
+import { FixMeLater } from "../../types";
 
 export const getSocialAccounts = () => async (dispatch: Dispatch<Action>) => {
     try {
-        let socialAccounts = await apiCall(
+        let { accounts: socialAccounts }: FixMeLater = await apiCall(
             "get",
             "/api/oauth/accounts/getStreams"
         );

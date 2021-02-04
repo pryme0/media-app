@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import AppBar from "@material-ui/core/AppBar";
@@ -26,10 +27,10 @@ interface IProps {
 function Index({ getSocialAccounts, socialAccounts }: IProps) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        getSocialAccounts().then(() => console.log("Got streams"));
+        getSocialAccounts().then(() => setLoading(false));
     }, []);
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -49,15 +50,37 @@ function Index({ getSocialAccounts, socialAccounts }: IProps) {
                     scrollButtons="off"
                     aria-label="scrollable auto tabs example"
                 >
-                    {socialAccounts.map((socialAccount) => (
-                        <Tab
-                            key={socialAccount._id}
-                            className={classes.tab}
-                            label={socialAccount.account.userName}
-                            icon={<FontAwesomeIcon icon={faTwitter} />}
-                            {...a11yProps(socialAccount._id)}
-                        />
-                    ))}
+                    {isLoading
+                        ? Array.from(new Array(2)).map((item, idx) => (
+                              <Tab
+                                  key={idx}
+                                  className={classes.tab}
+                                  label={
+                                      <Skeleton
+                                          style={{ marginLeft: ".5rem" }}
+                                          height={20}
+                                          width="50%"
+                                      />
+                                  }
+                                  icon={
+                                      <Skeleton
+                                          variant="circle"
+                                          height={30}
+                                          width={35}
+                                      />
+                                  }
+                              />
+                          ))
+                        : socialAccounts.map((socialAccount) => (
+                              <Tab
+                                  key={socialAccount._id}
+                                  className={classes.tab}
+                                  label={socialAccount.account.userName}
+                                  icon={<FontAwesomeIcon icon={faTwitter} />}
+                                  {...a11yProps(socialAccount._id)}
+                              />
+                          ))}
+
                     <Tab label="Item One" {...a11yProps(1)} />
                     <Tab label="Item Two" {...a11yProps(2)} />
                 </Tabs>

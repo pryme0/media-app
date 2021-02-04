@@ -19,6 +19,7 @@ function App() {
     useEffect(() => {
         if (localStorage.accessToken) {
             setAuthorizationToken(localStorage.accessToken);
+            debugger;
             try {
                 store.dispatch({
                     type: "AUTH",
