@@ -8,10 +8,16 @@ export const useStyles = makeStyles((theme: Theme) => ({
         padding: "0!important",
     },
     tabs: {
-        background: "#fff!important",
+        background: "#02040F!important",
+        padding: theme.spacing(0, 17),
+        overflowX: "auto",
+        "&::-webkit-scrollbar": {
+            display: "none",
+        },
     },
     tab: {
-        minHeight: "0",
+        minWidth: "180px",
+        height: "98%!Important",
         padding: 0,
         background: "#F6F7FB",
         border: "1px solid #D8D8D8",

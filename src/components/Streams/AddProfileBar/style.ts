@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         root: {
             flexGrow: 1,
             "& > header": {
-                background: "#02040F",
+                background: "#F6F7FB",
                 "& > .MuiToolbar-root": {
                     minHeight: "50px",
                 },

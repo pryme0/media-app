@@ -10,6 +10,7 @@ import { getSocialAccounts } from "../../store/actions/socialAccounts";
 import TabPanel from "./Tabs/TabPanel";
 import { useStyles } from "./styles";
 import AddProfileBar from "./AddProfileBar/AddProfileBar";
+import Stream from "./Stream/Stream";
 import { FixMeLater } from "../../types";
 
 function a11yProps(index: any) {
@@ -40,6 +41,7 @@ function Index({ getSocialAccounts, socialAccounts }: IProps) {
     return (
         <div className={classes.root}>
             <AppBar position="static" color="default">
+                <AddProfileBar />
                 <Tabs
                     value={value}
                     onChange={handleChange}
@@ -85,14 +87,13 @@ function Index({ getSocialAccounts, socialAccounts }: IProps) {
                     <Tab label="Item Two" {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
-            <AddProfileBar />
             {socialAccounts.map((socialAccount) => (
                 <TabPanel
                     value={socialAccount._id}
                     key={socialAccount._id}
                     index={socialAccount._id}
                 >
-                    {/* <Stream socialAccount={socialAccount} /> */}
+                    <Stream /*socialAccount={socialAccount}*/ />
                 </TabPanel>
             ))}
         </div>
