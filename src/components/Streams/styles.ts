@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
         padding: "0!important",
     },
     tabs: {
-        background: "#fff!important",
+        background: "#02040F!important",
     },
     tab: {
         minHeight: "0",
