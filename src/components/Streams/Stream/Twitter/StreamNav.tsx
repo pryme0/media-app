@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -30,12 +30,7 @@ function a11yProps(index: any) {
     };
 }
 
-interface IProps {
-    value: number;
-    setValue: Dispatch<SetStateAction<number>>;
-}
-
-function StreamNav({ value, setValue }: IProps) {
+function StreamNav({ value, setValue }) {
     const classes = useStyles();
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -56,6 +51,7 @@ function StreamNav({ value, setValue }: IProps) {
                     icon={
                         <FontAwesomeIcon
                             className={classes.tabIcon}
+                            size="2x"
                             icon={tab.icon}
                         />
                     }
