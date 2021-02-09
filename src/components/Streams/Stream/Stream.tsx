@@ -7,12 +7,12 @@ interface IProps {
 	socialAccount: FixMeLater;
 }
 
-const Stream = (props: IProps) => {
+const Stream = ({ socialAccount }: IProps) => {
 	const [value, setValue] = React.useState<number>(0);
 	return (
 		<div>
-			<TwitterStreamNav value={value} setValue={setValue} />
-			{/* <FacebookStreamNav value={value} setValue={setValue} /> */}
+			{/* <TwitterStreamNav value={value} setValue={setValue} /> */}
+			<FacebookStreamNav value={value} setValue={setValue} />
 		</div>
 	);
 };

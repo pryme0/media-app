@@ -8,6 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import { connect, useDispatch } from 'react-redux';
 import { getSocialAccounts } from '../../store/actions/socialAccounts';
 import TabPanel from './Tabs/TabPanel';
+import TabItem from './Tabs/Tab';
 import { useStyles } from './styles';
 import AddProfileBar from './AddProfileBar/AddProfileBar';
 import Stream from './Stream/Stream';
@@ -15,8 +16,8 @@ import { FixMeLater } from '../../types';
 
 function a11yProps(index: any) {
 	return {
-		id: `scrollable-auto-tab-${index}`,
-		'aria-controls': `scrollable-auto-tabpanel-${index}`,
+		id: `wrapped-tab-${index}`,
+		'aria-controls': `wrapped-tabpanel-${index}`,
 	};
 }
 
@@ -27,14 +28,19 @@ interface IProps {
 
 function Index({ getSocialAccounts, socialAccounts }: IProps) {
 	const classes = useStyles();
-	const [value, setValue] = React.useState(0);
+	const [value, setValue] = React.useState('');
 	const [isLoading, setLoading] = useState(true);
 
 	useEffect(() => {
-		getSocialAccounts().then(() => setLoading(false));
+		getSocialAccounts().then((res: FixMeLater) => {
+			if (res) {
+				setValue(res.socialAccounts[0]._id);
+				setLoading(false);
+			}
+		});
 	}, []);
 
-	const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+	const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
 		setValue(newValue);
 	};
 
@@ -61,22 +67,13 @@ function Index({ getSocialAccounts, socialAccounts }: IProps) {
 									icon={<Skeleton variant="circle" height={30} width={35} />}
 								/>
 						  ))
-						: socialAccounts.map((socialAccount) => (
-								<Tab
-									key={socialAccount._id}
-									className={classes.tab}
-									label={socialAccount.account.userName}
-									icon={<FontAwesomeIcon icon={faTwitter} />}
-									{...a11yProps(socialAccount._id)}
-								/>
+						: socialAccounts.map((socialAccount, i) => (
+								<TabItem key={socialAccount._id} className={classes.tab} socialAccount={socialAccount} {...a11yProps(socialAccount._id)} />
 						  ))}
-
-					<Tab label="Item One" {...a11yProps(1)} />
-					<Tab label="Item Two" {...a11yProps(2)} />
 				</Tabs>
 			</AppBar>
-			{socialAccounts.map((socialAccount) => (
-				<TabPanel value={socialAccount._id} key={socialAccount._id} index={socialAccount._id}>
+			{socialAccounts.map((socialAccount, i) => (
+				<TabPanel value={value} key={socialAccount._id} index={socialAccount._id}>
 					<Stream socialAccount={socialAccount} />
 				</TabPanel>
 			))}
