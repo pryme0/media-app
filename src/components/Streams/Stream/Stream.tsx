@@ -1,17 +1,22 @@
-import React from "react";
-import TwitterStreamNav from "../StreamNavs/TwitterStreamNav";
+import React from 'react';
+import FacebookStreamNav from '../StreamNavs/FacebokStreamNav';
+import TwitterStreamNav from '../StreamNavs/TwitterStreamNav';
+import { FixMeLater } from '../../../types';
 
-// interface Props {
-//     social
-// }
+interface IProps {
+	socialAccount: FixMeLater;
+}
 
-const Stream = () => {
-    const [value, setValue] = React.useState<number>(0);
-    return (
-        <div>
-            <TwitterStreamNav value={value} setValue={setValue} />
-        </div>
-    );
+const Stream = ({ socialAccount }: IProps) => {
+	const [value, setValue] = React.useState<number>(0);
+
+	return (
+		<div>
+			{socialAccount.account.name}
+			{/* <TwitterStreamNav value={value} setValue={setValue} /> */}
+			<FacebookStreamNav value={value} setValue={setValue} />
+		</div>
+	);
 };
 
 export default Stream;
