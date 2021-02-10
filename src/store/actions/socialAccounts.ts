@@ -11,3 +11,4 @@ export const getSocialAccounts = () => async (dispatch: Dispatch<Action>) => {
 		console.log(error.response);
 	}
 };
+ 

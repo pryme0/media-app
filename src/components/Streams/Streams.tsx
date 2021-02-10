@@ -8,7 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import { connect, useDispatch } from 'react-redux';
 import { getSocialAccounts } from '../../store/actions/socialAccounts';
 import TabPanel from './Tabs/TabPanel';
-import TabItem from './Tabs/Tab';
+import TabItem, { StyledTab } from './Tabs/Tab';
 import { useStyles } from './styles';
 import AddProfileBar from './AddProfileBar/AddProfileBar';
 import Stream from './Stream/Stream';
@@ -60,15 +60,16 @@ function Index({ getSocialAccounts, socialAccounts }: IProps) {
 				>
 					{isLoading
 						? Array.from(new Array(2)).map((item, idx) => (
-								<Tab
+								<StyledTab
 									key={idx}
+									value={0}
 									className={classes.tab}
 									label={<Skeleton style={{ marginLeft: '.5rem' }} height={20} width="50%" />}
-									icon={<Skeleton variant="circle" height={30} width={35} />}
+									icon={<Skeleton variant="circle" height={40} width={40} />}
 								/>
 						  ))
 						: socialAccounts.map((socialAccount, i) => (
-								<TabItem key={socialAccount._id} className={classes.tab} socialAccount={socialAccount} {...a11yProps(socialAccount._id)} />
+								<TabItem socialAccount={socialAccount} className={classes.tab} value={socialAccount._id} {...a11yProps(socialAccount._id)} />
 						  ))}
 				</Tabs>
 			</AppBar>
