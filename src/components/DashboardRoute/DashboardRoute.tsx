@@ -4,9 +4,10 @@ import LayoutMain from "../Layout/Main";
 import { FixMeLater } from "../../types";
 
 interface IProps {
-    component: FixMeLater;
+    component?: FixMeLater;
     exact?: any;
     path: string;
+    render?: FixMeLater;
 }
 
 const DashboardRoute = ({
