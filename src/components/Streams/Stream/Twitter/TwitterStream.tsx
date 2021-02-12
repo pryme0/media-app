@@ -9,6 +9,7 @@ const TwitterStream = (props: Props) => {
     return (
         <div>
             <StreamNav value={value} setValue={setValue} />
+            <h1>Twitter</h1>
         </div>
     );
 };

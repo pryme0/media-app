@@ -9,24 +9,20 @@ interface IProps {
 
 const Stream = ({ socialAccount }: IProps) => {
     const [value, setValue] = React.useState<number>(0);
+    const streamProviderType = socialAccount.account.accountType.toUpperCase();
 
     // this block of code will render different stream base on the social provider type
-    const renderStreamSocial = () => {
-        switch (socialAccount.account.accountType.toUpperCase()) {
-            case "TWITTER":
-                return <TwitterStream />;
-                break;
-            case "FACEBOOK":
-                return <FacebookStreamNav value={value} setValue={setValue} />;
-                break;
-            case "INSTAGRAM":
-                return <h1>Instagram</h1>;
-                break;
-            case "LINKEDIN":
-                return <h1>Linkedin</h1>;
-                break;
-            default:
-                break;
+    const renderStreamSocial = (): JSX.Element => {
+        if (streamProviderType === "TWITTER") {
+            return <TwitterStream />;
+        } else if (streamProviderType === "FACEBOOK") {
+            return <FacebookStreamNav value={value} setValue={setValue} />;
+        } else if (streamProviderType === "INSTAGRAM") {
+            return <h1>Instagram</h1>;
+        } else if (streamProviderType === "LINKEDIN") {
+            return <h1>Linkedin</h1>;
+        } else {
+            return <h1>Stream</h1>;
         }
     };
 
