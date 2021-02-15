@@ -1,20 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faEnvelopeOpenText, faHome, faQuidditch, faRetweet, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './styles/StreamNav.styles';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-
-const links = [
-	{ icon: faHome, text: 'Home', to: '/' },
-	{ icon: faTwitter, text: 'Mentions', to: '/' },
-	{ icon: faEnvelopeOpenText, text: 'Messages', to: '/' },
-	{ icon: faUser, text: 'Followers', to: '/' },
-	{ icon: faQuidditch, text: 'Tweets', to: '/' },
-	{ icon: faRetweet, text: 'Retweets', to: '/' },
-	{ icon: faClock, text: 'Schedule', to: '/' },
-];
+import LoadStream from './facebookContents/LoadStream';
+import TabPanel from '../Tabs/TabPanel';
+import { FixMeLater } from '../../../types';
 
 function a11yProps(index: any) {
 	return {
@@ -25,34 +16,50 @@ function a11yProps(index: any) {
 
 interface IProps {
 	value: number;
+	socialAccount: FixMeLater;
 	setValue: React.Dispatch<React.SetStateAction<number>>;
+	links: { icon: FixMeLater; text: string; to: string }[];
 }
 
-function StreamNav({ value, setValue }: IProps) {
+function StreamNav({ value, setValue, links, socialAccount }: IProps) {
+	let [stream, setStream] = React.useState<string>('Home Feeds');
+
 	const classes = useStyles();
 
 	const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-		setValue(newValue);
+		switch (newValue) {
+			case 0:
+				setStream('Home Feeds');
+				setValue(newValue);
+				break;
+			case 1:
+				setStream('User Feeds');
+				setValue(newValue);
+		}
 	};
 
 	return (
-		<Tabs
-			orientation="vertical"
-			variant="scrollable"
-			value={value}
-			onChange={handleChange}
-			aria-label="Vertical tabs example"
-			className={`${classes.tabs} ${classes.root}`}
-		>
-			{links.map((tab) => (
-				<Tab
-					icon={<FontAwesomeIcon className={classes.tabIcon} size="2x" icon={tab.icon} />}
-					label={tab.text}
-					className={classes.tabItem}
-					{...a11yProps(tab.text)}
-				/>
-			))}
-		</Tabs>
+		<Fragment>
+			<Tabs
+				orientation="vertical"
+				variant="scrollable"
+				value={value}
+				onChange={handleChange}
+				aria-label="Vertical tabs example"
+				className={`${classes.tabs} ${classes.root}`}
+			>
+				{links.map((tab) => (
+					<Tab
+						icon={<FontAwesomeIcon className={classes.tabIcon} size="2x" icon={tab.icon} />}
+						label={tab.text}
+						className={classes.tabItem}
+						{...a11yProps(tab.text)}
+					/>
+				))}
+			</Tabs>
+
+			<LoadStream socialAccount={socialAccount} stream={stream} />
+		</Fragment>
 	);
 }
 
