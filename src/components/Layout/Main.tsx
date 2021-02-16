@@ -50,7 +50,7 @@ function Main(props: IProps) {
                 <div className={classes.toolbar} />
                 {props.children}
             </main>
-            <Sidebar />
+            {/* <Sidebar /> */}
         </div>
     );
 }
