@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FixMeLater } from '../../../../types';
 import FacebookStreamNav from '../../StreamNavs/FacebokStreamNav';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-
-const links = [
-	{ icon: faHome, text: 'Home Feeds', to: '/' },
-	{ icon: faTwitter, text: 'User Feeds', to: '/' },
-];
+import LoadStream from './facebookFeeds/LoadStream';
 
 interface IProps {
 	socialAccount: FixMeLater;
@@ -16,10 +10,26 @@ interface IProps {
 const FacebookStream = ({ socialAccount }: IProps) => {
 	let [posts, setPosts] = useState<FixMeLater[]>([]);
 	let [value, setValue] = React.useState<number>(0);
+	let [stream, setStream] = React.useState<string>('Home Feeds');
+
+	useEffect(() => {
+		switch (value) {
+			case 0:
+				setStream('Home Feeds');
+				break;
+			case 1:
+				setStream('User Feeds');
+				break;
+			default:
+				setStream('Home Feeds');
+				break;
+		}
+	});
 
 	return (
 		<div>
-			<FacebookStreamNav socialAccount={socialAccount} value={value} setValue={setValue} links={links} />
+			<FacebookStreamNav socialAccount={socialAccount} value={value} setValue={setValue} setStream={setStream} />
+			<LoadStream socialAccount={socialAccount} stream={stream} />
 		</div>
 	);
 };
