@@ -1,5 +1,6 @@
 import React from "react";
 import StreamNav from "../../StreamNavs/TwitterStreamNav";
+import Tweet from "./Tweet";
 
 interface Props {}
 
@@ -8,8 +9,8 @@ const TwitterStream = (props: Props) => {
 
     return (
         <div>
+            <Tweet />
             <StreamNav value={value} setValue={setValue} />
-            <h1>Twitter</h1>
         </div>
     );
 };
