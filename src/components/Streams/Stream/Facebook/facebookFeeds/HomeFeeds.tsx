@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getFacebookPost } from '../../../../services/facebookStream';
-import { FixMeLater } from '../../../../types';
+import { getFacebookPost } from '../../../../../services/facebookStream';
+import { FixMeLater } from '../../../../../types';
 
 interface IProps {
 	socialAccount: FixMeLater;
