@@ -7,6 +7,8 @@ export const useStyles = makeStyles((theme) => ({
         border: "1.3px solid #D8D8D8",
         borderRight: `1px solid ${theme.palette.divider}`,
         maxWidth: `${STREAM_NAV_WIDTH}px`,
+        position: "fixed",
+        height: "calc(100vh - 6.9rem - 35px)",
     },
     tabs: {
         // height: "100%",
