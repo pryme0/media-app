@@ -16,8 +16,10 @@ import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 const useStyles = makeStyles((theme) => ({
+    paper: { marginBottom: "1rem", minWidth: "fit-content" },
     container: {
         maxWidth: "700px",
+        width: "fit-content",
         padding: theme.spacing(3, 0, 1, 3),
         "& .tweet-grid": {
             flexWrap: "nowrap",
@@ -94,7 +96,7 @@ const Post = (props: Props) => {
     }, [tweetTextRef]);
 
     return (
-        <Paper elevation={2}>
+        <Paper elevation={1} className={classes.paper}>
             <div className={classes.container}>
                 <Grid container className="tweet-grid">
                     <Grid item>
