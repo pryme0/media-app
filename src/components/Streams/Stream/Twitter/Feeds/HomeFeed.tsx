@@ -1,11 +1,11 @@
 import React from "react";
-import Post from "./Post";
-import StreamContainer from "../../StreamContainer";
-import { useStyles } from "./styles/Tweet.styles";
+import Post from "../Post";
+import StreamContainer from "../../../StreamContainer";
+import { useStyles } from "../styles/Tweet.styles";
 
 interface Props {}
 
-const Tweet = (props: Props) => {
+const HomeFeed = (props: Props) => {
     return (
         <StreamContainer>
             <Post />
@@ -18,4 +18,4 @@ const Tweet = (props: Props) => {
     );
 };
 
-export default Tweet;
+export default HomeFeed;

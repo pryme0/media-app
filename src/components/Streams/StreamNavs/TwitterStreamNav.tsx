@@ -14,13 +14,13 @@ import { useStyles } from "./styles/StreamNav.styles";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const links = [
-    { icon: faHome, text: "Home feed", to: "/" },
-    { icon: faTwitter, text: "Mentions", to: "/" },
-    { icon: faEnvelopeOpenText, text: "Messages", to: "/" },
-    { icon: faUser, text: "Followers", to: "/" },
-    { icon: faQuidditch, text: "Tweets", to: "/" },
-    { icon: faRetweet, text: "Retweets", to: "/" },
-    { icon: faClock, text: "Schedule", to: "/" },
+    { icon: faHome, text: "Home feed", index: "home-feeds" },
+    { icon: faTwitter, text: "Mentions", index: "/" },
+    { icon: faEnvelopeOpenText, text: "Messages", index: "/" },
+    { icon: faUser, text: "Followers", index: "/" },
+    { icon: faQuidditch, text: "Tweets", index: "/" },
+    { icon: faRetweet, text: "Retweets", index: "/" },
+    { icon: faClock, text: "Schedule", index: "/" },
 ];
 
 function a11yProps(index: any) {
@@ -31,14 +31,14 @@ function a11yProps(index: any) {
 }
 
 interface IProps {
-    value: number;
-    setValue: Dispatch<SetStateAction<number>>;
+    value: any;
+    setValue: Dispatch<SetStateAction<any>>;
 }
 
 function StreamNav({ value, setValue }: IProps) {
     const classes = useStyles();
 
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    const handleChange = (event: React.ChangeEvent<{}>, newValue: any) => {
         setValue(newValue);
     };
 
@@ -61,7 +61,7 @@ function StreamNav({ value, setValue }: IProps) {
                     }
                     label={tab.text}
                     className={classes.tabItem}
-                    {...a11yProps(tab.text)}
+                    {...a11yProps(tab.index)}
                 />
             ))}
         </Tabs>
