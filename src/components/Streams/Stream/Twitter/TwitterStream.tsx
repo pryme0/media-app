@@ -1,16 +1,18 @@
 import React from "react";
 import StreamNav from "../../StreamNavs/TwitterStreamNav";
-import Tweets from "./Tweets";
+import TwitterStreamPanels from "./TwitterStreamPanels";
 
 interface Props {}
 
 const TwitterStream = (props: Props) => {
-    const [value, setValue] = React.useState<number>(0);
+    let [currentStream, setCurrentStream] = React.useState<string>(
+        "home-feeds"
+    );
 
     return (
         <div style={{ display: "flex", width: "100%" }}>
-            <StreamNav value={value} setValue={setValue} />
-            <Tweets />
+            <StreamNav value={currentStream} setValue={setCurrentStream} />
+            <TwitterStreamPanels value={currentStream} />
         </div>
     );
 };
