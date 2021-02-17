@@ -3,7 +3,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStyles } from "./styles/StreamNav.styles";
-import LoadStream from "./facebookContents/LoadStream";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import TabPanel from "../Tabs/TabPanel";
 import { FixMeLater } from "../../../types";
 
@@ -14,28 +15,23 @@ function a11yProps(index: any) {
     };
 }
 
+const links = [
+    { icon: faHome, text: "Home Feeds", to: "/" },
+    { icon: faTwitter, text: "User Feeds", to: "/" },
+];
+
 interface IProps {
     value: number;
     socialAccount: FixMeLater;
+    setStream: React.Dispatch<React.SetStateAction<string>>;
     setValue: React.Dispatch<React.SetStateAction<number>>;
-    links: { icon: FixMeLater; text: string; to: string }[];
 }
 
-function StreamNav({ value, setValue, links, socialAccount }: IProps) {
-    let [stream, setStream] = React.useState<string>("Home Feeds");
-
+function StreamNav({ value, setValue, setStream, socialAccount }: IProps) {
     const classes = useStyles();
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-        switch (newValue) {
-            case 0:
-                setStream("Home Feeds");
-                setValue(newValue);
-                break;
-            case 1:
-                setStream("User Feeds");
-                setValue(newValue);
-        }
+        setValue(newValue);
     };
 
     return (
@@ -63,8 +59,6 @@ function StreamNav({ value, setValue, links, socialAccount }: IProps) {
                     />
                 ))}
             </Tabs>
-
-            <LoadStream socialAccount={socialAccount} stream={stream} />
         </Fragment>
     );
 }

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import HomeFeeds from './HomeFeeds';
-import { FixMeLater } from '../../../../types';
+import { FixMeLater } from '../../../../../types';
 
 interface IProps {
 	stream: string;
@@ -8,7 +8,6 @@ interface IProps {
 }
 
 const LoadStream = ({ socialAccount, stream }: IProps) => {
-	console.log(stream);
 	switch (stream) {
 		case 'Home Feeds':
 			return (
