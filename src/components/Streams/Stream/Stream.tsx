@@ -13,7 +13,7 @@ const Stream = ({ socialAccount }: IProps) => {
 	// this block of code will render different stream base on the social provider type
 	const renderStreamSocial = (): JSX.Element => {
 		if (streamProviderType === 'TWITTER') {
-			return <TwitterStream />;
+			return <TwitterStream socialAccount={socialAccount.account} />;
 		} else if (streamProviderType === 'FACEBOOK') {
 			return <FacebookStream socialAccount={socialAccount.account} />;
 		} else if (streamProviderType === 'INSTAGRAM') {
