@@ -5,9 +5,7 @@ import TwitterStreamPanels from "./TwitterStreamPanels";
 interface Props {}
 
 const TwitterStream = (props: Props) => {
-    let [currentStream, setCurrentStream] = React.useState<string>(
-        "home-feeds"
-    );
+    let [currentStream, setCurrentStream] = React.useState<number>(0);
 
     return (
         <div style={{ display: "flex", width: "100%" }}>

@@ -1,5 +1,5 @@
 import { Box, Typography } from "@material-ui/core";
-import Tweets from "./Tweets";
+import HomeFeed from "./Feeds/HomeFeed";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -34,20 +34,26 @@ interface Props {
 const TwitterStreamPanels = ({ value }: Props) => {
     return (
         <>
-            <TabPanel value={value} index="home-feeds">
-                <Tweets />
+            <TabPanel value={value} index={0}>
+                <HomeFeed />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                <h1>Item Two Lorem ipsum dolor sit.</h1>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Item Three
+                <h1>Item Two Lorem ipsum dolor sit. 3</h1>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                Item Four
+                <h1>Item Two Lorem ipsum dolor sit. Followers</h1>
             </TabPanel>
             <TabPanel value={value} index={4}>
-                Item Five
+                <h1>Item Two Lorem ipsum dolor sit Tweets.</h1>
+            </TabPanel>
+            <TabPanel value={value} index={5}>
+                <h1>Item Two Lorem ipsum dolor sit Reweets.</h1>
+            </TabPanel>
+            <TabPanel value={value} index={6}>
+                <h1>Item Two Lorem ipsum dolor sit Scedule.</h1>
             </TabPanel>
         </>
     );
