@@ -4,4 +4,6 @@ export const getHomeStream = (accountId: string | number) => {
 	return apiCall('get', `/api/oauth/twitter/home_timeline/${accountId}`);
 };
 
-// export default { getHomeStream };
+export const getUserMentions = (accountId: string | number) => {
+	return apiCall('get', `/api/oauth/twitter/mention_timeline/${accountId}`);
+};
