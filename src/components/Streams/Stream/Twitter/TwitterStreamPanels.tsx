@@ -1,6 +1,6 @@
 import HomeFeed from "./Feeds/HomeFeed";
 import TabPanel from "../StreamPanel";
-import FollowersFeed from "./Feeds/FollowersFeed";
+import FollowersFeed from "./Feeds/Followers/FollowersFeed";
 
 interface Props {
     value: any;
