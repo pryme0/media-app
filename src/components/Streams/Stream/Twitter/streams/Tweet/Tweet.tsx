@@ -1,6 +1,7 @@
 import {
     Grid,
     Paper,
+    makeStyles,
     Avatar,
     Typography,
     IconButton,
@@ -13,13 +14,33 @@ import testProfileImage from "../../../../assets/images/user-profile.jpg";
 import { faComment, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
-import useStyles from "./styles/Post.styles";
+import useStyles from "../../styles/Post.styles";
+import { FixMeLater } from "../../../../../../types";
 
-interface Props {}
+interface Props {
+    tweet: FixMeLater;
+    socialAccount: FixMeLater;
+}
 
-const Post = (props: Props) => {
+const Post = ({ tweet, socialAccount }: Props) => {
     const classes = useStyles();
     const tweetTextRef = useRef(null);
+
+    let { profileImg, userName, name } = socialAccount;
+    let {
+        id,
+        public_metrics,
+        text,
+        entities,
+        source,
+        referenced_tweets,
+    } = tweet;
+    let {
+        quote_count,
+        like_count,
+        reply_count,
+        retweet_count,
+    } = public_metrics;
 
     useEffect(() => {
         (tweetTextRef.current as any).innerHTML = (tweetTextRef.current as any).innerHTML.replace(
@@ -35,7 +56,7 @@ const Post = (props: Props) => {
                     <Grid item>
                         <Avatar
                             className="tweet-avatar"
-                            src={testProfileImage}
+                            src={profileImg}
                             alt="user profile"
                         />
                     </Grid>
@@ -43,7 +64,7 @@ const Post = (props: Props) => {
                         <Grid container className="user-info-grid">
                             <Grid item>
                                 <Typography className="username" variant="h6">
-                                    Santos Bright
+                                    {name}
                                 </Typography>
                             </Grid>
                             <Grid item>
@@ -51,25 +72,22 @@ const Post = (props: Props) => {
                                     className="user-handle"
                                     variant="h6"
                                 >
-                                    @devSantosBright
+                                    @{userName}
                                 </Typography>
                             </Grid>
                             <span className="dot">.</span>
-                            <Grid item>
-                                <Typography className="tweet-time" variant="h5">
-                                    19h
-                                </Typography>
-                            </Grid>
+                            {/* <Grid item>
+								<Typography className="tweet-time" variant="h5">
+									{created_at}
+								</Typography>
+							</Grid> */}
                         </Grid>
                         <Typography
                             ref={tweetTextRef}
                             className="tweet-caption"
                             variant="caption"
                         >
-                            Python Snake code to transform an image by using
-                            https://gist.github.com/svpino/be7ba9b873216e18079dab183e86b37c
-                            go to
-                            http://gist.github.com/svpino/be7ba9b873216e18079dab183e86b37c
+                            {text}
                         </Typography>
                         <Grid container className="icons-grid">
                             <Grid item className="comments">
@@ -79,7 +97,7 @@ const Post = (props: Props) => {
                                         icon={faComment}
                                     />
                                 </IconButton>
-                                <span className="count">11</span>
+                                <span className="count">{reply_count}</span>
                             </Grid>
                             <Grid item className="reweets">
                                 <IconButton>
@@ -88,7 +106,7 @@ const Post = (props: Props) => {
                                         icon={faRetweet}
                                     />
                                 </IconButton>
-                                <span className="count">11</span>
+                                <span className="count">{retweet_count}</span>
                             </Grid>
                             <Grid item className="likes">
                                 <FormControlLabel
@@ -103,7 +121,7 @@ const Post = (props: Props) => {
                                             name="checkedH"
                                         />
                                     }
-                                    label={77}
+                                    label={like_count}
                                 />
                             </Grid>
                         </Grid>
