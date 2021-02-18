@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
                 marginLeft: theme.spacing(2),
                 padding: theme.spacing(0.4, 0.6),
                 color: "#7d7979",
+                borderRadius: ".2rem",
             },
             "& .button-grid-item, & .info-grid-item": {
                 flex: 1,
@@ -46,16 +47,16 @@ const useStyles = makeStyles((theme: Theme) => ({
                 "& .follow-btn": {
                     marginLeft: "auto",
                     display: "block",
-                    borderRadius: "5rem",
+                    borderRadius: "6rem",
                     color: "#82CBF8",
-                    padding: theme.spacing(0.6, 3),
+                    padding: theme.spacing(0.6, 4),
                     fontSize: ".7rem!important",
                     borderColor: "#82CBF8!important",
                 },
                 "& .following-btn": {
                     marginLeft: "auto",
                     display: "block",
-                    borderRadius: "5rem",
+                    borderRadius: "6rem",
                     backgroundColor: "#82CBF8",
                     padding: theme.spacing(0.6, 3),
                     fontSize: ".7rem!important",

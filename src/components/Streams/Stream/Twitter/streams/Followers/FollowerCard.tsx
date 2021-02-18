@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-    Paper,
-    makeStyles,
-    Theme,
-    Grid,
-    Avatar,
-    Typography,
-    Button,
-} from "@material-ui/core";
+import { Paper, Grid, Avatar, Typography, Button } from "@material-ui/core";
 import useStyles from "./FollowerCard.styles";
 import userAvatar from "../../../../../../assets/images/user-profile.jpg";
 
@@ -55,7 +47,11 @@ const FollowerCard = (props: Props) => {
                                     </Grid>
                                 </Grid>
                                 <Grid item className="button-grid-item">
-                                    {/* <Button className="follow-btn" variant="outlined" color="primary">
+                                    {/* <Button
+                                        className="follow-btn"
+                                        variant="outlined"
+                                        color="primary"
+                                    >
                                         Follow
                                     </Button> */}
                                     <Button
