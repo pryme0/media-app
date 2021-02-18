@@ -29,6 +29,7 @@ interface Props {
 	socialAccount: FixMeLater;
 }
 
+<<<<<<< HEAD
 const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 	return (
 		<>
@@ -56,6 +57,34 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 			</TabPanel>
 		</>
 	);
+=======
+const TwitterStreamPanels = ({ value }: Props) => {
+    return (
+        <>
+            <TabPanel value={value} index={0}>
+                <HomeFeed />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <h1>Item Two Lorem ipsum dolor sit.</h1>
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <h1>Item Two Lorem ipsum dolor sit. 3</h1>
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                <FollowersFeed />
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+                <h1>Item Two Lorem ipsum dolor sit Tweets.</h1>
+            </TabPanel>
+            <TabPanel value={value} index={5}>
+                <h1>Item Two Lorem ipsum dolor sit Reweets.</h1>
+            </TabPanel>
+            <TabPanel value={value} index={6}>
+                <h1>Item Two Lorem ipsum dolor sit Scedule.</h1>
+            </TabPanel>
+        </>
+    );
+>>>>>>> 458f0188ddf25a08d20a863450fa4a7e4b505003
 };
 
 export default TwitterStreamPanels;
