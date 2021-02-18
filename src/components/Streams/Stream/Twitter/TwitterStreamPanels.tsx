@@ -1,5 +1,6 @@
 import HomeFeed from "./Feeds/HomeFeed";
 import TabPanel from "../StreamPanel";
+import FollowersFeed from "./Feeds/FollowersFeed";
 
 interface Props {
     value: any;
@@ -18,7 +19,7 @@ const TwitterStreamPanels = ({ value }: Props) => {
                 <h1>Item Two Lorem ipsum dolor sit. 3</h1>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <h1>Item Two Lorem ipsum dolor sit. Followers</h1>
+                <FollowersFeed />
             </TabPanel>
             <TabPanel value={value} index={4}>
                 <h1>Item Two Lorem ipsum dolor sit Tweets.</h1>
