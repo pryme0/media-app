@@ -1,7 +1,6 @@
 import {
     Grid,
     Paper,
-    makeStyles,
     Avatar,
     Typography,
     IconButton,

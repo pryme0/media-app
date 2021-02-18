@@ -22,12 +22,10 @@ const links = [
 
 interface IProps {
     value: number;
-    socialAccount: FixMeLater;
-    setStream: React.Dispatch<React.SetStateAction<string>>;
     setValue: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function StreamNav({ value, setValue, setStream, socialAccount }: IProps) {
+function StreamNav({ value, setValue }: IProps) {
     const classes = useStyles();
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {

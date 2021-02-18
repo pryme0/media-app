@@ -1,37 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { FixMeLater } from '../../../../types';
-import FacebookStreamNav from '../../StreamNavs/FacebokStreamNav';
-import LoadStream from './facebookFeeds/LoadStream';
+import { useState } from "react";
+import FacebookStreamNav from "../../StreamNavs/FacebokStreamNav";
+import FacebookStreamPanels from "./FacebookStreamPanels";
+import { FixMeLater } from "../../../../types";
 
 interface IProps {
-	socialAccount: FixMeLater;
+    socialAccount: FixMeLater;
 }
 
 const FacebookStream = ({ socialAccount }: IProps) => {
-	let [posts, setPosts] = useState<FixMeLater[]>([]);
-	let [value, setValue] = React.useState<number>(0);
-	let [stream, setStream] = React.useState<string>('Home Feeds');
+    let [value, setValue] = useState<number>(0);
 
-	useEffect(() => {
-		switch (value) {
-			case 0:
-				setStream('Home Feeds');
-				break;
-			case 1:
-				setStream('User Feeds');
-				break;
-			default:
-				setStream('Home Feeds');
-				break;
-		}
-	});
-
-	return (
-		<div>
-			<FacebookStreamNav socialAccount={socialAccount} value={value} setValue={setValue} setStream={setStream} />
-			<LoadStream socialAccount={socialAccount} stream={stream} />
-		</div>
-	);
+    return (
+        <div>
+            <FacebookStreamNav value={value} setValue={setValue} />
+            <FacebookStreamPanels socialAccount={socialAccount} value={value} />
+        </div>
+    );
 };
 
 export default FacebookStream;

@@ -1,31 +1,6 @@
-import { Box, Typography } from "@material-ui/core";
 import HomeFeed from "./Feeds/HomeFeed";
-
-interface TabPanelProps {
-    children?: React.ReactNode;
-    index: any;
-    value: any;
-}
-
-function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`vertical-tabpanel-${index}`}
-            aria-labelledby={`vertical-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box p={0}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-}
+import TabPanel from "../StreamPanel";
+import FollowersFeed from "./Feeds/Followers/FollowersFeed";
 
 interface Props {
     value: any;
@@ -44,7 +19,7 @@ const TwitterStreamPanels = ({ value }: Props) => {
                 <h1>Item Two Lorem ipsum dolor sit. 3</h1>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <h1>Item Two Lorem ipsum dolor sit. Followers</h1>
+                <FollowersFeed />
             </TabPanel>
             <TabPanel value={value} index={4}>
                 <h1>Item Two Lorem ipsum dolor sit Tweets.</h1>
