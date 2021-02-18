@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../Tweet';
+import Tweet from '../tweets/Tweet';
 import StreamContainer from '../../../StreamContainer';
 import { useStyles } from '../styles/Tweet.styles';
 import { FixMeLater } from '../../../../../types';
@@ -26,7 +26,9 @@ const Mentions = ({ socialAccount }: IProps) => {
 			});
 	}, []);
 
-	return <StreamContainer>{loading ? <Loader /> : mentions.map((tweet: FixMeLater) => <Post tweet={tweet.tweet} />)}</StreamContainer>;
+	return (
+		<StreamContainer>{loading ? <Loader /> : mentions.map((tweet: FixMeLater) => <Tweet tweet={tweet} socialAccount={socialAccount} />)}</StreamContainer>
+	);
 };
 
 export default Mentions;

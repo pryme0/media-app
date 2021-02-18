@@ -1,7 +1,8 @@
 import { Box, Typography } from '@material-ui/core';
 import { FixMeLater } from '../../../../types';
-import HomeTimeline from './Feeds/HomeTimeline';
-import Mentions from './Feeds/Mentions';
+import HomeTimeline from './streams/HomeTimeline';
+import Mentions from './streams/Mentions';
+// import Followers from './streams/Followers';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -41,7 +42,8 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 				<h1>Item Two Lorem ipsum dolor sit. 3</h1>
 			</TabPanel>
 			<TabPanel value={value} index={3}>
-				<h1>Item Two Lorem ipsum dolor sit. Followers</h1>
+				<h1>Item Two Lorem ipsum dolor sit Tweets.</h1>
+				{/* <Followers socialAccount={socialAccount} /> */}
 			</TabPanel>
 			<TabPanel value={value} index={4}>
 				<h1>Item Two Lorem ipsum dolor sit Tweets.</h1>

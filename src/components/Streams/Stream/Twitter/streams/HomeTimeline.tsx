@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Post from '../Tweet';
+import Timeline from '../tweets/Timeline';
 import StreamContainer from '../../../StreamContainer';
 import { useStyles } from '../styles/Tweet.styles';
 import { FixMeLater } from '../../../../../types';
@@ -25,7 +25,11 @@ const HomeTimeline = ({ socialAccount }: IProps) => {
 			});
 	}, []);
 
-	return <StreamContainer>{loading ? <Loader /> : homeStream.map((tweet: FixMeLater) => <Post tweet={tweet.tweet} />)}</StreamContainer>;
+	return (
+		<StreamContainer>
+			{loading ? <Loader /> : homeStream.map((tweet: FixMeLater) => <Timeline tweet={tweet.tweet} socialAccount={socialAccount} />)}
+		</StreamContainer>
+	);
 };
 
 export default HomeTimeline;
