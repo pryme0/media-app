@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     body: {
         height: "calc(100vh - 6.9rem - 50px)",
         overflowY: "auto",
-        padding: theme.spacing(3, 0, 0, 3),
+        padding: theme.spacing(3, 0, 3, 3),
     },
 }));
 
