@@ -5,8 +5,8 @@ import testProfileImage from '../../../../assets/images/user-profile.jpg';
 import { faComment, faRetweet } from '@fortawesome/free-solid-svg-icons';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import useStyles from '../styles/Post.styles';
-import { FixMeLater } from '../../../../../types';
+import useStyles from '../../styles/Post.styles';
+import { FixMeLater } from '../../../../../../types';
 
 interface Props {
 	tweet: FixMeLater;

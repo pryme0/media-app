@@ -1,8 +1,8 @@
 import { Box, Typography } from '@material-ui/core';
 import { FixMeLater } from '../../../../types';
-import HomeTimeline from './streams/HomeTimeline';
-import Mentions from './streams/Mentions';
-import Followers from './streams/Followers';
+import HomeTimeline from './Streams/HomeTimeline';
+import Mentions from './Streams/Mentions';
+import Followers from '../Twitter/Streams/Followers/FollowersFeed';
 
 interface TabPanelProps {
 	children?: React.ReactNode;

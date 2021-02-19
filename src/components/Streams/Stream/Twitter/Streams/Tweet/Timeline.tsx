@@ -5,8 +5,8 @@ import testProfileImage from '../../../../assets/images/user-profile.jpg';
 import { faComment, faRetweet } from '@fortawesome/free-solid-svg-icons';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import useStyles from '../styles/Post.styles';
-import { FixMeLater } from '../../../../../types';
+import useStyles from '../../styles/Post.styles';
+import { FixMeLater } from '../../../../../../types';
 
 interface Props {
 	tweet: FixMeLater;
@@ -16,8 +16,7 @@ interface Props {
 const Post = ({ tweet, socialAccount }: Props) => {
 	const classes = useStyles();
 	const tweetTextRef = useRef(null);
-
-	let { id, id_str, text, entities, user, created_at } = tweet;
+	let { id, id_str, text, entities, user, created_at, retweet_count, favorite_count, favorited, retweeted, retweeted_status } = tweet;
 	let { name, profile_image_url_https, screen_name } = user;
 
 	useEffect(() => {
@@ -67,14 +66,14 @@ const Post = ({ tweet, socialAccount }: Props) => {
 								<IconButton>
 									<FontAwesomeIcon className="icon" icon={faRetweet} />
 								</IconButton>
-								<span className="count">11</span>
+								<span className="count">{retweet_count}</span>
 							</Grid>
 							<Grid item className="likes">
 								<FormControlLabel
 									control={
 										<Checkbox icon={<FavoriteBorder className="icon" />} checkedIcon={<Favorite className="icon" />} name="checkedH" />
 									}
-									label={77}
+									label={retweeted_status ? retweeted_status.favorite_count : favorite_count}
 								/>
 							</Grid>
 						</Grid>

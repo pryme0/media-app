@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Tweet from '../tweets/Tweet';
+import Tweet from './Tweet/Tweet';
 import StreamContainer from '../../../StreamContainer';
 import { useStyles } from '../styles/Tweet.styles';
 import { FixMeLater } from '../../../../../types';
