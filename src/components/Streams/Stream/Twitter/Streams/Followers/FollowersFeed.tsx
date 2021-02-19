@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Tab, Tabs, Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import FollowerCard from './FollowerCard';
 import useStyles from './FollowFeed.style';
-import { getUserFollowers, getUserFollowing } from '../../../../../../services/twitterStream';
-import Loader from '../Loader';
 import { FixMeLater } from '../../../../../../types';
 
 interface TabPanelProps {
@@ -34,36 +32,13 @@ function a11yProps(index: any) {
 	};
 }
 
-interface Props {
+interface IProps {
 	socialAccount: FixMeLater;
 }
 
-const FollowersFeed = ({ socialAccount }: Props) => {
+const FollowersFeed = ({ socialAccount }: IProps) => {
 	const classes = useStyles();
 	const [currentTab, setCurrentTab] = useState(0);
-	let [followers, setFollowers] = React.useState<FixMeLater>([]);
-	let [following, setFollowing] = React.useState<FixMeLater>([]);
-	let [followersLoading, setFollowersLoading] = React.useState<boolean>(true);
-	let [followingLoading, setFollowingLoading] = React.useState<boolean>(true);
-
-	useEffect(() => {
-		getUserFollowers(socialAccount.accountId)
-			.then((result: FixMeLater) => {
-				setFollowersLoading(false);
-				setFollowers(result.data.users);
-			})
-			.catch((error) => {
-				error.message ? console.log(error.message) : console.log(error);
-			});
-		getUserFollowing(socialAccount.accountId)
-			.then(({ result }: FixMeLater) => {
-				setFollowingLoading(false);
-				setFollowing(result.users);
-			})
-			.catch((error) => {
-				error.message ? console.log(error.message) : console.log(error);
-			});
-	}, []);
 
 	const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
 		setCurrentTab(newValue);
@@ -95,10 +70,15 @@ const FollowersFeed = ({ socialAccount }: Props) => {
 			</div>
 			<div className={classes.body}>
 				<TabPanel value={currentTab} index={0}>
-					{followersLoading ? <Loader /> : followers.map((user: FixMeLater) => <FollowerCard user={user} />)}
+					<FollowerCard />
+					<FollowerCard />
+					<FollowerCard />
+					<FollowerCard />
+					<FollowerCard />
+					<FollowerCard />
 				</TabPanel>
 				<TabPanel value={currentTab} index={1}>
-					{followingLoading ? <Loader /> : following.map((user: FixMeLater) => <FollowerCard user={user} />)}
+					<h1>Following</h1>
 				</TabPanel>
 			</div>
 		</div>
