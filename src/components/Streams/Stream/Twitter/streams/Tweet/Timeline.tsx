@@ -26,7 +26,7 @@ const Post = ({ tweet, socialAccount }: Props) => {
     const classes = useStyles();
     const tweetTextRef = useRef(null);
 
-    let { id, id_str, text, entities, user, created_at } = tweet;
+    let { id_str, text, entities, user, created_at } = tweet;
     let { name, profile_image_url_https, screen_name } = user;
 
     useEffect(() => {
