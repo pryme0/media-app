@@ -11,9 +11,11 @@ import { FixMeLater } from '../../../../../../types';
 interface Props {
 	tweet: FixMeLater;
 	socialAccount: FixMeLater;
+	toggleFavorite: (tweetStrId: string, favorited: boolean) => void;
+	toggleRetweet: (tweetStrId: string, favorited: boolean) => void;
 }
 
-const Post = ({ tweet, socialAccount }: Props) => {
+const Timeline = ({ tweet, socialAccount, toggleFavorite, toggleRetweet }: Props) => {
 	const classes = useStyles();
 	const tweetTextRef = useRef(null);
 	let { id, id_str, text, entities, user, created_at, retweet_count, favorite_count, favorited, retweeted, retweeted_status } = tweet;
@@ -63,13 +65,28 @@ const Post = ({ tweet, socialAccount }: Props) => {
 								<span className="count">11</span>
 							</Grid>
 							<Grid item className="reweets">
-								<IconButton>
-									<FontAwesomeIcon className="icon" icon={faRetweet} />
-								</IconButton>
-								<span className="count">{retweet_count}</span>
+								<FormControlLabel
+									onClick={() =>
+										toggleRetweet(
+											retweeted_status ? retweeted_status.id_str : id_str,
+											retweeted_status ? retweeted_status.retweeted : retweeted
+										)
+									}
+									checked={retweeted_status ? retweeted_status.retweeted : retweeted}
+									control={
+										<Checkbox
+											icon={<FontAwesomeIcon className="icon" icon={faRetweet} />}
+											checkedIcon={<FontAwesomeIcon style={{ color: 'green' }} className="icon" icon={faRetweet} />}
+											name="checkedH"
+										/>
+									}
+									label={retweeted_status ? retweeted_status.retweet_count : retweet_count}
+								/>
 							</Grid>
 							<Grid item className="likes">
 								<FormControlLabel
+									onClick={() => toggleFavorite(id_str, retweeted_status ? retweeted_status.favorited : favorited)}
+									checked={retweeted_status ? retweeted_status.favorited : favorited}
 									control={
 										<Checkbox icon={<FavoriteBorder className="icon" />} checkedIcon={<Favorite className="icon" />} name="checkedH" />
 									}
@@ -84,4 +101,4 @@ const Post = ({ tweet, socialAccount }: Props) => {
 	);
 };
 
-export default Post;
+export default Timeline;
