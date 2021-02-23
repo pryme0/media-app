@@ -31,7 +31,10 @@ const HomeTimeline = ({ socialAccount }: IProps) => {
                 <Loader />
             ) : (
                 homeStream.map((tweet: FixMeLater) => (
-                    <Timeline tweet={tweet} socialAccount={socialAccount} />
+                    <Timeline
+                        tweet={tweet.tweet}
+                        socialAccount={socialAccount}
+                    />
                 ))
             )}
         </StreamContainer>
