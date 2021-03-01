@@ -11,15 +11,15 @@ import { FixMeLater } from '../../../../../../types';
 interface Props {
 	tweet: FixMeLater;
 	socialAccount: FixMeLater;
-	toggleFavorite: (tweetStrId: string, favorited: boolean) => void;
-	toggleRetweet: (tweetStrId: string, favorited: boolean) => void;
 }
 
-const Timeline = ({ tweet, socialAccount, toggleFavorite, toggleRetweet }: Props) => {
+const Post = ({ tweet, socialAccount }: Props) => {
 	const classes = useStyles();
 	const tweetTextRef = useRef(null);
-	let { id, id_str, text, entities, user, created_at, retweet_count, favorite_count, favorited, retweeted, retweeted_status } = tweet;
-	let { name, profile_image_url_https, screen_name } = user;
+
+	let { profileImg, userName, name } = socialAccount;
+	let { id, public_metrics, text, entities, source, referenced_tweets } = tweet;
+	let { quote_count, like_count, reply_count, retweet_count } = public_metrics;
 
 	useEffect(() => {
 		(tweetTextRef.current as any).innerHTML = (tweetTextRef.current as any).innerHTML.replace(
@@ -33,7 +33,7 @@ const Timeline = ({ tweet, socialAccount, toggleFavorite, toggleRetweet }: Props
 			<div className={classes.container}>
 				<Grid container className="tweet-grid">
 					<Grid item>
-						<Avatar className="tweet-avatar" src={profile_image_url_https} alt="user profile" />
+						<Avatar className="tweet-avatar" src={profileImg} alt="user profile" />
 					</Grid>
 					<Grid item className="tweet-text-grid">
 						<Grid container className="user-info-grid">
@@ -44,15 +44,15 @@ const Timeline = ({ tweet, socialAccount, toggleFavorite, toggleRetweet }: Props
 							</Grid>
 							<Grid item>
 								<Typography className="user-handle" variant="h6">
-									@{screen_name}
+									@{userName}
 								</Typography>
 							</Grid>
 							<span className="dot">.</span>
-							<Grid item>
+							{/* <Grid item>
 								<Typography className="tweet-time" variant="h5">
 									{created_at}
 								</Typography>
-							</Grid>
+							</Grid> */}
 						</Grid>
 						<Typography ref={tweetTextRef} className="tweet-caption" variant="caption">
 							{text}
@@ -62,35 +62,20 @@ const Timeline = ({ tweet, socialAccount, toggleFavorite, toggleRetweet }: Props
 								<IconButton>
 									<FontAwesomeIcon className="icon" icon={faComment} />
 								</IconButton>
-								<span className="count">11</span>
+								<span className="count">{reply_count}</span>
 							</Grid>
 							<Grid item className="reweets">
-								<FormControlLabel
-									onClick={() =>
-										toggleRetweet(
-											retweeted_status ? retweeted_status.id_str : id_str,
-											retweeted_status ? retweeted_status.retweeted : retweeted
-										)
-									}
-									checked={retweeted_status ? retweeted_status.retweeted : retweeted}
-									control={
-										<Checkbox
-											icon={<FontAwesomeIcon className="icon" icon={faRetweet} />}
-											checkedIcon={<FontAwesomeIcon style={{ color: 'green' }} className="icon" icon={faRetweet} />}
-											name="checkedH"
-										/>
-									}
-									label={retweeted_status ? retweeted_status.retweet_count : retweet_count}
-								/>
+								<IconButton>
+									<FontAwesomeIcon className="icon" icon={faRetweet} />
+								</IconButton>
+								<span className="count">{retweet_count}</span>
 							</Grid>
 							<Grid item className="likes">
 								<FormControlLabel
-									onClick={() => toggleFavorite(id_str, retweeted_status ? retweeted_status.favorited : favorited)}
-									checked={retweeted_status ? retweeted_status.favorited : favorited}
 									control={
 										<Checkbox icon={<FavoriteBorder className="icon" />} checkedIcon={<Favorite className="icon" />} name="checkedH" />
 									}
-									label={retweeted_status ? retweeted_status.favorite_count : favorite_count}
+									label={like_count}
 								/>
 							</Grid>
 						</Grid>
@@ -101,4 +86,4 @@ const Timeline = ({ tweet, socialAccount, toggleFavorite, toggleRetweet }: Props
 	);
 };
 
-export default Timeline;
+export default Post;
