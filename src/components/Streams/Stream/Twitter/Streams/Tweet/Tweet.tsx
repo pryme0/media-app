@@ -11,14 +11,16 @@ import { FixMeLater } from '../../../../../../types';
 interface Props {
 	tweet: FixMeLater;
 	socialAccount: FixMeLater;
+	toggleRetweet: (tweetStrId: string, retweeted: boolean) => void;
+	toggleFavorite: (tweetStrId: string, retweeted: boolean) => void;
 }
 
-const Post = ({ tweet, socialAccount }: Props) => {
+const Post = ({ tweet, socialAccount, toggleRetweet, toggleFavorite }: Props) => {
 	const classes = useStyles();
 	const tweetTextRef = useRef(null);
 
 	let { profileImg, userName, name } = socialAccount;
-	let { id, public_metrics, text, entities, source, referenced_tweets } = tweet;
+	let { id, id_str, public_metrics, text, entities, source, referenced_tweets } = tweet;
 	let { quote_count, like_count, reply_count, retweet_count } = public_metrics;
 
 	useEffect(() => {

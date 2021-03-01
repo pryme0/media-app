@@ -8,9 +8,13 @@ import Loader from './Loader';
 
 interface IProps {
 	socialAccount: FixMeLater;
+	currentStream: FixMeLater;
+	setCurrentStream: React.Dispatch<any>;
+	toggleRetweet: (tweetStrId: string, retweeted: boolean) => void;
+	toggleFavorite: (tweetStrId: string, retweeted: boolean) => void;
 }
 
-const Mentions = ({ socialAccount }: IProps) => {
+const Mentions = ({ socialAccount, currentStream, setCurrentStream, toggleRetweet, toggleFavorite }: IProps) => {
 	let [mentions, setMentions] = React.useState<FixMeLater>([]);
 	let [loading, setLoading] = React.useState<boolean>(true);
 
@@ -26,7 +30,17 @@ const Mentions = ({ socialAccount }: IProps) => {
 	}, []);
 
 	return (
-		<StreamContainer>{loading ? <Loader /> : mentions.map((tweet: FixMeLater) => <Tweet tweet={tweet} socialAccount={socialAccount} />)}</StreamContainer>
+		<StreamContainer>
+			{loading ? (
+				<Loader />
+			) : mentions ? (
+				mentions.map((tweet: FixMeLater) => (
+					<Tweet tweet={tweet} socialAccount={socialAccount} toggleFavorite={toggleFavorite} toggleRetweet={toggleRetweet} />
+				))
+			) : (
+				<h2>No Mention Found</h2>
+			)}
+		</StreamContainer>
 	);
 };
 
