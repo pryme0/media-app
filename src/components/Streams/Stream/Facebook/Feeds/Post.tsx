@@ -1,4 +1,8 @@
-import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCheckCircle,
+    faThumbsDown,
+    faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     Paper,
@@ -13,11 +17,12 @@ import {
 import { VerifiedUser } from "@material-ui/icons";
 import React from "react";
 import userImage from "../../../../../assets/images/user-profile.jpg";
+import likeIcon from "../../../../../assets/icons/facebook/like.svg";
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
         "& .post-header": {
-            padding: theme.spacing(2),
+            padding: theme.spacing(2, 2, 1),
             alignItems: "flex-start",
             flexWrap: "no-wrap",
             "& .text-grid-item": {
@@ -25,24 +30,29 @@ const useStyles = makeStyles((theme: Theme) => ({
             },
         },
         "& .post-user-avatar": {
-            width: "60px",
-            height: "60px",
+            width: "45px",
+            height: "45px",
         },
         "& .username": {
             fontWeight: "600",
-            fontSize: "1.3rem",
+            fontSize: "1rem",
             lineHeight: 1,
         },
         "& .time-info": {
-            fontSize: "1.2rem",
+            fontSize: ".95rem",
         },
         "& .post-caption": {
             padding: theme.spacing(0, 2),
             wordBreak: "break-word",
+            fontSize: ".95rem",
+            fontWeight: 500,
         },
     },
     container: {
         maxWidth: "44rem",
+    },
+    verifiedIcon: {
+        color: "#258AFF",
     },
 }));
 
@@ -64,7 +74,11 @@ const Post = (props: Props) => {
                     </Grid>
                     <Grid item className="text-grid-item">
                         <Typography variant="h6" className="username">
-                            Santos Bright <VerifiedUser />
+                            Santos Bright{" "}
+                            <FontAwesomeIcon
+                                className={classes.verifiedIcon}
+                                icon={faCheckCircle}
+                            />
                         </Typography>
                         <Typography variant="h6" className="time-info">
                             <span className="time">Febuary 19 at 6:10 PM</span>
@@ -86,7 +100,23 @@ const Post = (props: Props) => {
                     English communicator and you wil
                 </Typography>
                 <div className="post-footer">
-                    <Grid container className="reaction-counts"></Grid>
+                    <Grid container className="reaction-counts">
+                        <Grid className="likesIconCount" item>
+                            <span className="like-icon">
+                                <img
+                                    src={likeIcon}
+                                    alt="facebook like"
+                                    height="18"
+                                    width="18"
+                                />
+                            </span>
+                            <span className="reaction-count">223K</span>
+                        </Grid>
+                        <Grid item>
+                            <span className="reaction-count">271 Comments</span>
+                            <span className="reaction-count">47 Shares</span>
+                        </Grid>
+                    </Grid>
                     <Grid container className="reaction-actions">
                         <Grid item>
                             <FormControlLabel
@@ -104,8 +134,38 @@ const Post = (props: Props) => {
                                 label="Like"
                             />
                         </Grid>
-                        <Grid item></Grid>
-                        <Grid item></Grid>
+                        <Grid item>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        icon={
+                                            <FontAwesomeIcon
+                                                icon={faThumbsUp}
+                                            />
+                                        }
+                                        checkedIcon={<img />}
+                                        name="checkedH"
+                                    />
+                                }
+                                label="Comment"
+                            />
+                        </Grid>
+                        <Grid item>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        icon={
+                                            <FontAwesomeIcon
+                                                icon={faThumbsUp}
+                                            />
+                                        }
+                                        checkedIcon={<img />}
+                                        name="checkedH"
+                                    />
+                                }
+                                label="Share"
+                            />
+                        </Grid>
                     </Grid>
                 </div>
             </div>
