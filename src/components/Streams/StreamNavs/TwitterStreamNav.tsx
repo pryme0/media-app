@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faEnvelopeOpenText, faHome, faQuidditch, faRetweet, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faEnvelopeOpenText, faHome, faQuidditch, faRetweet, faUser, faPeopleArrows } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './styles/StreamNav.styles';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
@@ -10,7 +10,7 @@ const links = [
 	{ icon: faHome, text: 'Home', index: 'home-feeds' },
 	{ icon: faTwitter, text: 'Mentions', index: '/' },
 	{ icon: faEnvelopeOpenText, text: 'Messages', index: '/' },
-	{ icon: faUser, text: 'Followers', index: '/' },
+	{ icon: faPeopleArrows, text: 'Followers', index: '/' },
 	{ icon: faQuidditch, text: 'User', index: '/' },
 	{ icon: faRetweet, text: 'Retweets', index: '/' },
 	{ icon: faClock, text: 'Schedule', index: '/' },

@@ -36,6 +36,7 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 	let [currentStream, setCurrentStream] = React.useState<FixMeLater>([]);
 
 	let toggleFavorite = (tweetStrId: string, favorited: boolean) => {
+		console.log(tweetStrId, favorited);
 		if (favorited) {
 			destroyFavorite(socialAccount.accountId, tweetStrId)
 				.then(({ result }: FixMeLater) => {
