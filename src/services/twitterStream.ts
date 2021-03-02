@@ -4,8 +4,13 @@ export const getHomeStream = (accountId: string | number) => {
 	return apiCall('get', `/api/oauth/twitter/home_timeline/${accountId}`);
 };
 
-export const getUserMentions = (accountId: string | number) => {
-	return apiCall('get', `/api/oauth/twitter/mention_timeline/${accountId}`);
+export const getUserTimeline = (accountId: string | number) => {
+	return apiCall('get', `/api/oauth/twitter/user_timeline/${accountId}`);
+};
+
+export const getUserMentions = (userName: string | number) => {
+	// return apiCall('get', `/api/oauth/twitter/mention_timeline/${userName}`);
+	return apiCall('get', `/api/oauth/twitter/mention_timeline/devSantosBright`);
 };
 
 export const getUserFollowers = (accountId: string | number) => {

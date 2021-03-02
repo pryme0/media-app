@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { FixMeLater } from '../../../../types';
 import HomeTimeline from './Streams/HomeTimeline';
+import UserTimeline from './Streams/UserTimeline';
 import Mentions from './Streams/Mentions';
 import Followers from '../Twitter/Streams/Followers/FollowersFeed';
 import { favoriteTweet, destroyFavorite, unRetweet, retweet } from '../../../../services/twitterStream';
@@ -35,6 +36,7 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 	let [currentStream, setCurrentStream] = React.useState<FixMeLater>([]);
 
 	let toggleFavorite = (tweetStrId: string, favorited: boolean) => {
+		console.log(tweetStrId, favorited);
 		if (favorited) {
 			destroyFavorite(socialAccount.accountId, tweetStrId)
 				.then(({ result }: FixMeLater) => {
@@ -158,13 +160,19 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 				/>
 			</TabPanel>
 			<TabPanel value={value} index={2}>
-				<h1>Item Two Lorem ipsum dolor sit. 3</h1>
+				<h1>Item Two Lorem ipsum dolor sit Reweets.</h1>
 			</TabPanel>
 			<TabPanel value={value} index={3}>
 				<Followers socialAccount={socialAccount} />
 			</TabPanel>
 			<TabPanel value={value} index={4}>
-				<h1>Item Two Lorem ipsum dolor sit Tweets.</h1>
+				<UserTimeline
+					socialAccount={socialAccount}
+					currentStream={currentStream}
+					setCurrentStream={setCurrentStream}
+					toggleFavorite={toggleFavorite}
+					toggleRetweet={toggleRetweet}
+				/>
 			</TabPanel>
 			<TabPanel value={value} index={5}>
 				<h1>Item Two Lorem ipsum dolor sit Reweets.</h1>
