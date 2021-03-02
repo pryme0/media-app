@@ -3,7 +3,7 @@ import Timeline from './Tweet/Timeline';
 import StreamContainer from '../../../StreamContainer';
 import { useStyles } from '../styles/Tweet.styles';
 import { FixMeLater } from '../../../../../types';
-import { getUserMentions } from '../../../../../services/twitterStream';
+import { getUserTimeline } from '../../../../../services/twitterStream';
 import Loader from './Loader';
 
 interface IProps {
@@ -14,14 +14,15 @@ interface IProps {
 	toggleFavorite: (tweetStrId: string, retweeted: boolean) => void;
 }
 
-const Mentions = ({ socialAccount, currentStream, setCurrentStream, toggleRetweet, toggleFavorite }: IProps) => {
+const UserTimeline = ({ socialAccount, currentStream, setCurrentStream, toggleRetweet, toggleFavorite }: IProps) => {
 	let [loading, setLoading] = React.useState<boolean>(true);
 
 	useEffect(() => {
-		getUserMentions(socialAccount.userName)
-			.then(({ mentions }: FixMeLater) => {
+		getUserTimeline(socialAccount.accountId)
+			.then(({ result }: FixMeLater) => {
 				setLoading(false);
-				setCurrentStream(mentions.statuses);
+				setCurrentStream(result);
+				console.log(currentStream);
 			})
 			.catch((error) => {
 				error.message ? console.log(error.message) : console.log(error);
@@ -32,15 +33,13 @@ const Mentions = ({ socialAccount, currentStream, setCurrentStream, toggleRetwee
 		<StreamContainer>
 			{loading ? (
 				<Loader />
-			) : currentStream ? (
+			) : (
 				currentStream.map((tweet: FixMeLater) => (
 					<Timeline tweet={tweet} socialAccount={socialAccount} toggleFavorite={toggleFavorite} toggleRetweet={toggleRetweet} />
 				))
-			) : (
-				<h2>No Mention Found</h2>
 			)}
 		</StreamContainer>
 	);
 };
 
-export default Mentions;
+export default UserTimeline;
