@@ -23,9 +23,9 @@ const Timeline = ({ tweet, socialAccount, toggleFavorite, toggleRetweet }: Props
 		nextDay: '[Tomorrow at] LT',
 		sameDay: 'H[h]',
 		lastDay: '[Yesterday at] LT',
-		lastWeek: '[last] dddd [at] LT',
-		nextWeek: 'dddd [at] LT',
-		sameElse: 'L',
+		lastWeek: '[last] ddd [at] LT',
+		nextWeek: 'ddd [at] LT',
+		sameElse: 'D MMM YY',
 	};
 
 	let { created_at, entities, favorite_count, favorited, id, id_str, retweet_count, retweeted, retweeted_status, user, text } = tweet;
@@ -95,7 +95,7 @@ const Timeline = ({ tweet, socialAccount, toggleFavorite, toggleRetweet }: Props
 									control={
 										<Checkbox icon={<FavoriteBorder className="icon" />} checkedIcon={<Favorite className="icon" />} name="checkedH" />
 									}
-									label={favorite_count ? favorite_count : retweeted_status.favorite_count}
+									label={retweeted_status ? retweeted_status.favorite_count : favorite_count}
 								/>
 							</Grid>
 						</Grid>
