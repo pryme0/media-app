@@ -1,31 +1,29 @@
-import { useEffect, useState } from "react";
-import { getFacebookPost } from "../../../../../services/facebookStream";
-import { FixMeLater } from "../../../../../types";
-import StreamContainer from "../../../StreamContainer";
-import Post from "./Post";
+import { useEffect, useState } from 'react';
+import { getFacebookPost } from '../../../../../services/facebookStream';
+import { FixMeLater } from '../../../../../types';
+import StreamContainer from '../../../StreamContainer';
+import Post from './Post';
 
 interface IProps {
-    socialAccount: FixMeLater;
+	socialAccount: FixMeLater;
 }
 
 const HomeFeed = ({ socialAccount }: IProps) => {
-    let [posts, setPosts] = useState<FixMeLater[]>([]);
+	let [posts, setPosts] = useState<FixMeLater[]>([]);
 
-    useEffect(() => {
-        getFacebookPost(socialAccount.accountId).then((res: FixMeLater) => {
-            setPosts(res.posts.data);
-        });
-    }, []);
+	useEffect(() => {
+		getFacebookPost(socialAccount.accountId).then((res: FixMeLater) => {
+			setPosts(res.posts.data);
+		});
+	}, []);
 
-    return (
-        <StreamContainer>
-            <Post />
-            <h1>Facebook Home Feeds </h1>
-            {posts.map((post: FixMeLater) => (
-                <p>{post.message}</p>
-            ))}
-        </StreamContainer>
-    );
+	return (
+		<StreamContainer>
+			{posts.map((post: FixMeLater) => (
+				<Post post={post} />
+			))}
+		</StreamContainer>
+	);
 };
 
 export default HomeFeed;
