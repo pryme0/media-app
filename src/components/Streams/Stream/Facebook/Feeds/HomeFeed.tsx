@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getFacebookPost } from "../../../../../services/facebookStream";
 import { FixMeLater } from "../../../../../types";
 import StreamContainer from "../../../StreamContainer";
+import Post from "./Post";
 
 interface IProps {
     socialAccount: FixMeLater;
@@ -18,6 +19,7 @@ const HomeFeed = ({ socialAccount }: IProps) => {
 
     return (
         <StreamContainer>
+            <Post />
             <h1>Facebook Home Feeds </h1>
             {posts.map((post: FixMeLater) => (
                 <p>{post.message}</p>
