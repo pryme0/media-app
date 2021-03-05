@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     container: {
         maxWidth: "44rem",
+        minWidth: "500px",
     },
     verifiedIcon: {
         color: "#258AFF",
