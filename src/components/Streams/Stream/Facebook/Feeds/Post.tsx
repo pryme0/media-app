@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Paper, Grid, Typography, Avatar, FormControlLabel, Checkbox, makeStyles, Theme } from '@material-ui/core';
 import { VerifiedUser } from '@material-ui/icons';
 import React from 'react';
+import Moment from 'react-moment';
 import userImage from '../../../../../assets/images/user-profile.jpg';
 import likeIcon from '../../../../../assets/icons/facebook/like.svg';
 import { FixMeLater } from '../../../../../types';
@@ -50,7 +51,16 @@ interface IProps {
 
 const Post = ({ post }: IProps) => {
 	const classes = useStyles();
-	let { comments, likes, message } = post;
+	const calendarStrings = {
+		nextDay: '[Tomorrow at] LT',
+		sameDay: 'H[h]',
+		lastDay: '[Yesterday at] LT',
+		lastWeek: '[last] ddd [at] LT',
+		nextWeek: 'ddd [at] LT',
+		sameElse: 'D MMM YY',
+	};
+
+	let { comments, likes, message, created_time } = post;
 
 	return (
 		<Paper elevation={4} className={classes.root}>
@@ -64,7 +74,9 @@ const Post = ({ post }: IProps) => {
 							Santos Bright <FontAwesomeIcon className={classes.verifiedIcon} icon={faCheckCircle} />
 						</Typography>
 						<Typography variant="h6" className="time-info">
-							<span className="time">Febuary 19 at 6:10 PM</span>
+							{/* <span className="time"> */}
+							<Moment calendar={calendarStrings}>{created_time}</Moment>
+							{/* </span> */}
 							<span className="dot">.</span>
 							<span className="emoji">🌎</span>
 						</Typography>
@@ -79,10 +91,10 @@ const Post = ({ post }: IProps) => {
 							<span className="like-icon">
 								<img src={likeIcon} alt="facebook like" height="18" width="18" />
 							</span>
-							<span className="reaction-count">223K</span>
+							<span className="reaction-count">{likes.summary.total_count}</span>
 						</Grid>
 						<Grid item>
-							<span className="reaction-count">271 Comments</span>
+							<span className="reaction-count">{comments.summary.total_count} Comments</span>
 							<span className="reaction-count">47 Shares</span>
 						</Grid>
 					</Grid>
