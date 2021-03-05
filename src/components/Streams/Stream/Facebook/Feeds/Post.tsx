@@ -1,15 +1,18 @@
+import React from 'react';
+import Moment from 'react-moment';
 import { faCheckCircle, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Paper, Grid, Typography, Avatar, FormControlLabel, Checkbox, makeStyles, Theme } from '@material-ui/core';
 import { VerifiedUser } from '@material-ui/icons';
-import React from 'react';
-import Moment from 'react-moment';
 import userImage from '../../../../../assets/images/user-profile.jpg';
 import likeIcon from '../../../../../assets/icons/facebook/like.svg';
 import { FixMeLater } from '../../../../../types';
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
+		minWidth: 'fit-content',
+		marginBottom: '1rem',
+		paddingBottom: '.5rem',
 		'& .post-header': {
 			padding: theme.spacing(2, 2, 1),
 			alignItems: 'flex-start',
@@ -33,15 +36,62 @@ const useStyles = makeStyles((theme: Theme) => ({
 		'& .post-caption': {
 			padding: theme.spacing(0, 2),
 			wordBreak: 'break-word',
-			fontSize: '.95rem',
+			fontSize: '1.6rem',
 			fontWeight: 500,
 		},
 	},
 	container: {
 		maxWidth: '44rem',
+		minWidth: '500px',
 	},
 	verifiedIcon: {
 		color: '#258AFF',
+	},
+	postFooter: {
+		padding: theme.spacing(0, 2),
+		'& .reaction-counts': {
+			padding: theme.spacing(0.7, 0),
+			'& .reaction-count': {
+				fontSize: '1rem',
+				lineHeight: '100%',
+				padding: theme.spacing(0, 1),
+			},
+			'& > *': {
+				flex: 1,
+			},
+			'& .likesIconCount': {
+				display: 'flex',
+				alignItems: 'center',
+				'& .likesCount': {
+					display: 'flex',
+					alignItems: 'center',
+				},
+			},
+			'& .commentShareCount': {
+				textAlign: 'end',
+			},
+		},
+	},
+	reactionActions: {
+		padding: theme.spacing(0.4, 0),
+		borderTop: '.2px solid rgba(0, 0, 0, .2)',
+		borderBottom: '.2px solid rgba(0, 0, 0, .2)',
+		'& .reaction': {
+			flex: 1,
+			display: 'flex',
+			justifyContent: 'center',
+			cursor: 'pointer',
+			borderRadius: '.2rem',
+			'&:hover': {
+				backgroundColor: 'rgb(234 234 234 / 80%)',
+			},
+			'& .MuiFormControlLabel-root > .MuiButtonBase-root': {
+				padding: '5px',
+			},
+			'& .MuiFormControlLabel-root': {
+				margin: 0,
+			},
+		},
 	},
 }));
 
@@ -60,7 +110,7 @@ const Post = ({ post }: IProps) => {
 		sameElse: 'D MMM YY',
 	};
 
-	let { comments, likes, message, created_time } = post;
+	let { comments, likes, message, created_time, from } = post;
 
 	return (
 		<Paper elevation={4} className={classes.root}>
@@ -71,12 +121,13 @@ const Post = ({ post }: IProps) => {
 					</Grid>
 					<Grid item className="text-grid-item">
 						<Typography variant="h6" className="username">
-							Santos Bright <FontAwesomeIcon className={classes.verifiedIcon} icon={faCheckCircle} />
+							{from.name} <FontAwesomeIcon className={classes.verifiedIcon} icon={faCheckCircle} />
 						</Typography>
 						<Typography variant="h6" className="time-info">
-							{/* <span className="time"> */}
-							<Moment calendar={calendarStrings}>{created_time}</Moment>
-							{/* </span> */}
+							<span className="time">
+								<Moment calendar={calendarStrings}>{created_time}</Moment>
+								{/* Febuary 19 at 6:10 PM */}
+							</span>
 							<span className="dot">.</span>
 							<span className="emoji">🌎</span>
 						</Typography>
@@ -85,7 +136,7 @@ const Post = ({ post }: IProps) => {
 				<Typography variant="h6" className="post-caption">
 					{message}
 				</Typography>
-				<div className="post-footer">
+				<div className={classes.postFooter}>
 					<Grid container className="reaction-counts">
 						<Grid className="likesIconCount" item>
 							<span className="like-icon">
@@ -98,20 +149,20 @@ const Post = ({ post }: IProps) => {
 							<span className="reaction-count">47 Shares</span>
 						</Grid>
 					</Grid>
-					<Grid container className="reaction-actions">
-						<Grid item>
+					<Grid container className={classes.reactionActions}>
+						<Grid item className="reaction">
 							<FormControlLabel
 								control={<Checkbox icon={<FontAwesomeIcon icon={faThumbsUp} />} checkedIcon={<img />} name="checkedH" />}
 								label="Like"
 							/>
 						</Grid>
-						<Grid item>
+						<Grid item className="reaction">
 							<FormControlLabel
 								control={<Checkbox icon={<FontAwesomeIcon icon={faThumbsUp} />} checkedIcon={<img />} name="checkedH" />}
 								label="Comment"
 							/>
 						</Grid>
-						<Grid item>
+						<Grid item className="reaction">
 							<FormControlLabel
 								control={<Checkbox icon={<FontAwesomeIcon icon={faThumbsUp} />} checkedIcon={<img />} name="checkedH" />}
 								label="Share"
