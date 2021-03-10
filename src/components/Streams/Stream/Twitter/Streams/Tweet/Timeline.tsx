@@ -8,6 +8,7 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Moment from 'react-moment';
 import useStyles from '../../styles/Post.styles';
 import { FixMeLater } from '../../../../../../types';
+import { formatCount } from '../../../../../../services/twitterStream';
 
 interface Props {
 	tweet: FixMeLater;
@@ -85,7 +86,7 @@ const Timeline = ({ tweet, socialAccount, toggleFavorite, toggleRetweet }: Props
 											name="checkedH"
 										/>
 									}
-									label={retweet_count}
+									label={formatCount(retweet_count)}
 								/>
 							</Grid>
 							<Grid item className="likes">
@@ -95,7 +96,7 @@ const Timeline = ({ tweet, socialAccount, toggleFavorite, toggleRetweet }: Props
 									control={
 										<Checkbox icon={<FavoriteBorder className="icon" />} checkedIcon={<Favorite className="icon" />} name="checkedH" />
 									}
-									label={retweeted_status ? retweeted_status.favorite_count : favorite_count}
+									label={retweeted_status ? formatCount(retweeted_status.favorite_count) : formatCount(favorite_count)}
 								/>
 							</Grid>
 						</Grid>

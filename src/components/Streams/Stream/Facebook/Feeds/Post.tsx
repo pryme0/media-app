@@ -1,6 +1,6 @@
 import React from 'react';
 import Moment from 'react-moment';
-import { faCheckCircle, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faThumbsDown, faThumbsUp, faCommentDots, faComments } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Paper, Grid, Typography, Avatar, FormControlLabel, Checkbox, makeStyles, Theme } from '@material-ui/core';
 import { VerifiedUser } from '@material-ui/icons';
@@ -97,9 +97,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface IProps {
 	post: FixMeLater;
+	togglePostLike: (accountId: string | number, hasLike: boolean) => void;
 }
 
-const Post = ({ post }: IProps) => {
+const Post = ({ post, togglePostLike }: IProps) => {
 	const classes = useStyles();
 	const calendarStrings = {
 		nextDay: '[Tomorrow at] LT',
@@ -110,7 +111,7 @@ const Post = ({ post }: IProps) => {
 		sameElse: 'D MMM YY',
 	};
 
-	let { comments, likes, message, created_time, from } = post;
+	let { comments, likes, message, created_time, from, id } = post;
 
 	return (
 		<Paper elevation={4} className={classes.root}>
@@ -150,24 +151,34 @@ const Post = ({ post }: IProps) => {
 						</Grid>
 					</Grid>
 					<Grid container className={classes.reactionActions}>
+						{likes.summary.can_like && (
+							<Grid item className="reaction">
+								<FormControlLabel
+									onClick={() => togglePostLike(id, likes.summary.has_liked)}
+									control={<Checkbox icon={<FontAwesomeIcon icon={faThumbsUp} />} checkedIcon={<img />} name="checkedH" />}
+									label={likes.summary.has_liked ? 'Liked' : 'Like'}
+									checked={likes.summary.has_liked}
+								/>
+							</Grid>
+						)}
 						<Grid item className="reaction">
 							<FormControlLabel
-								control={<Checkbox icon={<FontAwesomeIcon icon={faThumbsUp} />} checkedIcon={<img />} name="checkedH" />}
-								label="Like"
+								control={
+									<Checkbox
+										icon={<FontAwesomeIcon icon={faCommentDots} />}
+										checkedIcon={<FontAwesomeIcon style={{ color: 'gray' }} icon={faComments} />}
+										name="checkedH"
+									/>
+								}
+								label="Comments"
 							/>
 						</Grid>
-						<Grid item className="reaction">
-							<FormControlLabel
-								control={<Checkbox icon={<FontAwesomeIcon icon={faThumbsUp} />} checkedIcon={<img />} name="checkedH" />}
-								label="Comment"
-							/>
-						</Grid>
-						<Grid item className="reaction">
+						{/* <Grid item className="reaction">
 							<FormControlLabel
 								control={<Checkbox icon={<FontAwesomeIcon icon={faThumbsUp} />} checkedIcon={<img />} name="checkedH" />}
 								label="Share"
 							/>
-						</Grid>
+						</Grid> */}
 					</Grid>
 				</div>
 			</div>
