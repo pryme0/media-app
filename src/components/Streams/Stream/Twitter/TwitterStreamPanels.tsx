@@ -5,7 +5,16 @@ import HomeTimeline from './Streams/HomeTimeline';
 import UserTimeline from './Streams/UserTimeline';
 import Mentions from './Streams/Mentions';
 import Followers from '../Twitter/Streams/Followers/FollowersFeed';
-import { favoriteTweet, destroyFavorite, unRetweet, retweet } from '../../../../services/twitterStream';
+import {
+	favoriteTweet,
+	destroyFavorite,
+	unRetweet,
+	retweet,
+	favoriteResponse,
+	unFavoriteResponse,
+	unRetweetResponse,
+	retweetResponse,
+} from '../../../../services/twitterStream';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -36,28 +45,14 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 	let [currentStream, setCurrentStream] = React.useState<FixMeLater>([]);
 
 	let toggleFavorite = (tweetStrId: string, favorited: boolean) => {
-		console.log(tweetStrId, favorited);
 		if (favorited) {
 			destroyFavorite(socialAccount.accountId, tweetStrId)
-				.then(({ result }: FixMeLater) => {
+				.then(async ({ result }: FixMeLater) => {
 					let newStream;
 					if (result) {
 						newStream = currentStream.map((tweet: FixMeLater) => (tweet.id === result.id ? result : tweet));
 					} else {
-						newStream = currentStream.map((tweet: FixMeLater) =>
-							tweet.id_str == tweetStrId
-								? {
-										...tweet,
-										favorited: false,
-										favorite_count: tweet.favorite_count - 1,
-										retweeted_status: {
-											...tweet.retweeted_status,
-											favorited: false,
-											favorite_count: tweet.retweeted_status.favorite_count - 1,
-										},
-								  }
-								: tweet
-						);
+						newStream = await unFavoriteResponse(currentStream, tweetStrId);
 					}
 					setCurrentStream(newStream);
 				})
@@ -66,25 +61,12 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 				});
 		} else {
 			favoriteTweet(socialAccount.accountId, tweetStrId)
-				.then(({ result }: FixMeLater) => {
+				.then(async ({ result }: FixMeLater) => {
 					let newStream;
 					if (result) {
 						newStream = currentStream.map((tweet: FixMeLater) => (tweet.id === result.id ? result : tweet));
 					} else {
-						newStream = currentStream.map((tweet: FixMeLater) =>
-							tweet.id_str == tweetStrId
-								? {
-										...tweet,
-										favorited: true,
-										favorite_count: tweet.favorite_count + 1,
-										retweeted_status: {
-											...tweet.retweeted_status,
-											favorited: true,
-											favorite_count: tweet.retweeted_status.favorite_count + 1,
-										},
-								  }
-								: tweet
-						);
+						newStream = await favoriteResponse(currentStream, tweetStrId);
 					}
 					setCurrentStream(newStream);
 				})
@@ -96,21 +78,10 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 	};
 
 	let toggleRetweet = (tweetStrId: string, retweeted: boolean) => {
-		console.log('str id ', tweetStrId);
 		if (retweeted) {
 			unRetweet(socialAccount.accountId, tweetStrId)
-				.then(({ result }: FixMeLater) => {
-					console.log(result);
-					let newStream = currentStream.map((tweet: FixMeLater) =>
-						tweet.id_str == tweetStrId
-							? {
-									...tweet,
-									retweeted: false,
-									retweet_count: tweet.retweet_count - 1,
-									retweeted_status: { ...tweet.retweeted_status, retweeted: false, retweet_count: tweet.retweeted_status.retweet_count - 1 },
-							  }
-							: tweet
-					);
+				.then(async ({ result }: FixMeLater) => {
+					let newStream = await unRetweetResponse(currentStream, tweetStrId);
 					setCurrentStream(newStream);
 				})
 				.catch((error) => {
@@ -118,18 +89,8 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 				});
 		} else {
 			retweet(socialAccount.accountId, tweetStrId)
-				.then(({ result }: FixMeLater) => {
-					console.log(result);
-					let newStream = currentStream.map((tweet: FixMeLater) =>
-						tweet.id_str === tweetStrId
-							? {
-									...tweet,
-									retweeted: true,
-									retweet_count: tweet.retweet_count + 1,
-									retweeted_status: { ...tweet.retweeted_status, retweeted: true, retweet_count: tweet.retweeted_status.retweet_count + 1 },
-							  }
-							: tweet
-					);
+				.then(async ({ result }: FixMeLater) => {
+					let newStream = await retweetResponse(currentStream, tweetStrId);
 					setCurrentStream(newStream);
 				})
 				.catch((error) => {
