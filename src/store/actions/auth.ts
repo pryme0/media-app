@@ -12,8 +12,6 @@ export const auth = (formData: FixMeLater, history: FixMeLater, action: string, 
 		const data: FixMeLater = await apiCall('post', `/api/oauth/${action}`, formData);
 		const { accessToken, user, refreshToken } = data;
 
-		console.log(data);
-
 		if (isRemember || action.toUpperCase() === 'SIGNUP') {
 			localStorage.setItem('accessToken', accessToken);
 			localStorage.setItem('refreshToken', refreshToken);

@@ -1,3 +1,4 @@
+import { string } from 'yup/lib/locale';
 import { FixMeLater } from '../types';
 import { apiCall } from './api';
 
@@ -43,6 +44,41 @@ export const formatCount = (count: number) => {
 	if (count > 1000) res = `${Math.floor(count / 1000)}k`;
 	else res = count;
 	return res;
+};
+
+export const readableInt = (num: number) => {
+	let numStr: string = num.toString();
+	let arr: string[] = numStr.split('');
+	let remainder = Math.floor(arr.length % 3);
+	let newStr = '';
+	let count = 0;
+	let once = false;
+
+	arr.forEach((val: string | number, i: number) => {
+		if (remainder === 0) {
+			if (count === 3) {
+				newStr = newStr + ',';
+				count = 0;
+			}
+			newStr = newStr + arr[i];
+			count++;
+		}
+
+		if (remainder > 0) {
+			if (count === remainder && once === false) {
+				newStr = newStr + ',';
+				once = true;
+				count = 0;
+			}
+			if (count === 3) {
+				newStr = newStr + ',';
+				count = 0;
+			}
+			newStr = newStr + arr[i];
+			count++;
+		}
+	});
+	return newStr;
 };
 
 export const favoriteResponse = (tweets: FixMeLater, tweetStrId: string) => {
