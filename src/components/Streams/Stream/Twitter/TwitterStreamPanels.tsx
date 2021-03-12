@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { FixMeLater } from '../../../../types';
 import HomeTimeline from './Streams/HomeTimeline';
@@ -6,6 +6,8 @@ import UserTimeline from './Streams/UserTimeline';
 import Mentions from './Streams/Mentions';
 import Followers from '../Twitter/Streams/Followers/FollowersFeed';
 import {
+	getUserFollowers,
+	getUserFollowing,
 	favoriteTweet,
 	destroyFavorite,
 	unRetweet,
