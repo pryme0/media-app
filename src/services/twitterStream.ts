@@ -41,7 +41,7 @@ export const unRetweet = (accountId: string | number, tweetStrId: string | numbe
 export const formatCount = (count: number) => {
 	let res: number | string = 1;
 	if (count > 1000) res = `${Math.floor(count / 1000)}k`;
-	else res = 1;
+	else res = count;
 	return res;
 };
 

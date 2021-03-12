@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FacebookStream from './Facebook/FacebookStream';
 import TwitterStream from './Twitter/TwitterStream';
 import { FixMeLater } from '../../../types';

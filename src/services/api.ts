@@ -8,6 +8,14 @@ export function setAuthorizationToken(token: string) {
 	}
 }
 
+export function setRefreshToken(refreshToken: string) {
+	if (refreshToken) {
+		axios.defaults.headers.common['refresh-token'] = `${refreshToken}`;
+	} else {
+		delete axios.defaults.headers.common['refresh-token'];
+	}
+}
+
 export function apiCall(method: string, path: string, data?: any) {
 	return new Promise((resolve, reject) => {
 		return (axios as any)

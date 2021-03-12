@@ -63,7 +63,7 @@ const FollowersFeed = ({ socialAccount }: Props) => {
 			.catch((error) => {
 				error.message ? console.log(error.message) : console.log(error);
 			});
-	}, []);
+	});
 
 	const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
 		setCurrentTab(newValue);
