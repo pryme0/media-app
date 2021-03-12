@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Auth from './Auth';
@@ -7,8 +8,11 @@ import Streams from './Streams';
 import FlashMessage from '../components/FlashMessage/FlashMessage';
 import ConnectSocialStep from '../components/ConnectSocial/ConnectSocialStep';
 import withAuth from '../HOCS/withAuth';
+import Logout from './Logout';
 
 function App() {
+	const [loggedOut, setLoggedOut] = useState(false);
+
 	return (
 		<BrowserRouter>
 			<FlashMessage />
@@ -18,7 +22,7 @@ function App() {
 				<DashboardRoute exact component={Index} path="/" />
 				<DashboardRoute exact component={Streams} path="/streams" />
 				<Route exact path="/connect-social-one" component={ConnectSocialStep} />
-				{/* <Route exact component={Streams} path="/logout" /> */}
+				<Route exact component={Logout} path="/logout" />
 			</Switch>
 		</BrowserRouter>
 	);
