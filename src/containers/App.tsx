@@ -11,8 +11,6 @@ import withAuth from '../HOCS/withAuth';
 import Logout from './Logout';
 
 function App() {
-	const [loggedOut, setLoggedOut] = useState(false);
-
 	return (
 		<BrowserRouter>
 			<FlashMessage />
