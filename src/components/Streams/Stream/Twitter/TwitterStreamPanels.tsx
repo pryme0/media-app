@@ -6,8 +6,6 @@ import UserTimeline from './Streams/UserTimeline';
 import Mentions from './Streams/Mentions';
 import Followers from '../Twitter/Streams/Followers/FollowersFeed';
 import {
-	getUserFollowers,
-	getUserFollowing,
 	favoriteTweet,
 	destroyFavorite,
 	unRetweet,
