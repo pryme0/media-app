@@ -5,6 +5,7 @@ export default makeStyles((theme) => ({
     container: {
         maxWidth: "700px",
         width: "fit-content",
+        minWidth: "600px",
         padding: theme.spacing(3, 0, 1, 3),
         "& .tweet-grid": {
             flexWrap: "nowrap",
