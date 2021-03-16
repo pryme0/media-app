@@ -1,7 +1,18 @@
 import { Avatar, Button, Grid, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+
+import { Swiper, SwiperSlide } from "swiper/react";
 import userImage from "../../../../../assets/images/user-profile.jpg";
 import postImage from "../../../../../assets/images/long.jpg";
+
+// Import Swiper styles
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.scss";
+import "swiper/components/scrollbar/scrollbar.scss";
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 export const useStyles = makeStyles((theme) => ({
     paper: {
@@ -41,6 +52,22 @@ export const useStyles = makeStyles((theme) => ({
                 height: "auto",
                 objectFit: "cover",
             },
+        },
+        "& .swiper-button-disabled": {
+            display: "none",
+        },
+        "& .swiper-button-prev:after, & .swiper-container-rtl .swiper-button-next:after, & .swiper-button-next:after,  & .swiper-container-rtl .swiper-button-prev:after": {
+            background: "white",
+            borderRadius: "50%",
+            fontSize: "1rem",
+            fontWeight: 900,
+            padding: ".8rem",
+            color: "rgb(127 118 118)",
+            height: "30px",
+            width: "30px",
+            display: "grid",
+            placeContent: "center",
+            boxShadow: "1px 0px 3px #b9aeae",
         },
     },
     reactions: {
@@ -118,9 +145,31 @@ const Post = () => {
                     </Grid>
                 </Grid>
                 <div className={classes.body}>
-                    <figure className="image">
-                        <img src={postImage} alt="" />
-                    </figure>
+                    <Swiper
+                        // spaceBetween={50}
+                        slidesPerView={1}
+                        navigation
+                        // slidesPerView="auto"
+                        // pagination={{ clickable: true }}
+                        // scrollbar={{ draggable: true }}
+                        onSwiper={(swiper) => console.log(swiper)}
+                        onSlideChange={() => console.log("slide change")}
+                    >
+                        <SwiperSlide style={{ width: "100%" }}>
+                            <figure className="image">
+                                <img src={postImage} alt="" />
+                            </figure>
+                        </SwiperSlide>
+                        <SwiperSlide style={{ width: "100%" }}>
+                            <figure className="image">
+                                <img src={userImage} alt="" />
+                            </figure>
+                        </SwiperSlide>
+                        <SwiperSlide style={{ width: "100%" }}>
+                            Slide 3
+                        </SwiperSlide>
+                    </Swiper>
+
                     <div className={classes.reactions}>
                         <Grid container className={classes.likeCount}>
                             <Grid item>
