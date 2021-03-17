@@ -65,6 +65,7 @@ export const StyledTab = withStyles((theme: Theme) =>
 
 const Label = ({ label }: { label: string }) => {
 	const classes = useStyles();
+
 	return (
 		<div>
 			<span>{label}</span>
