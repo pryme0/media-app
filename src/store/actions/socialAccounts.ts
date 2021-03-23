@@ -11,4 +11,7 @@ export const getSocialAccounts = () => async (dispatch: Dispatch<Action>) => {
 		console.log(error.response);
 	}
 };
- 
+
+export const getHomeStream = (accountId: string | number) => {
+	return apiCall('get', `/api/oauth/twitter/home_timeline/${accountId}`);
+};

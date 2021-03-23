@@ -11,8 +11,8 @@ export const getUserTimeline = (accountId: string | number) => {
 };
 
 export const getUserMentions = (userName: string | number) => {
-	// return apiCall('get', `/api/oauth/twitter/mention_timeline/${userName}`);
-	return apiCall('get', `/api/oauth/twitter/mention_timeline/devSantosBright`);
+	return apiCall('get', `/api/oauth/twitter/mention_timeline/${userName}`);
+	// return apiCall('get', `/api/oauth/twitter/mention_timeline/devSantosBright`);
 };
 
 export const getUserFollowers = (accountId: string | number) => {

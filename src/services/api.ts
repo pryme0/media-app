@@ -52,5 +52,3 @@ export function apiCall(method: string, path: string, data?: any) {
 			});
 	});
 }
-
-export default instance;
