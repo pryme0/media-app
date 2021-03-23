@@ -69,8 +69,6 @@ const Timeline = ({
         following,
     } = user;
 
-    console.log(retweeted_status ?? "not reweet");
-
     useEffect(() => {
         (tweetTextRef.current as any).innerHTML = (tweetTextRef.current as any).innerHTML.replace(
             /(http:\/\/[^\s]+)/g && /(https:\/\/[^\s]+)/g,

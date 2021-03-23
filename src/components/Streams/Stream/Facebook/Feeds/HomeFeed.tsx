@@ -66,6 +66,9 @@ const HomeFeed = ({ socialAccount }: IProps) => {
 	useEffect(() => {
 		getFacebookPost(socialAccount.accountId).then((res: FixMeLater) => {
 			setLoading(false);
+			if (res.error) {
+				console.log('Code ', res.error.error_subcode, 'Message ', res.error.message, 'Type ', res.error.type);
+			}
 			setPosts(res.posts.data);
 		});
 	}, []);

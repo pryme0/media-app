@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { FixMeLater } from '../../../../types';
 import HomeTimeline from './Streams/HomeFeed';
-import { getInstagramFeeds } from '../../../../services/instagramStream';
 import Schedule from './Streams/Schedule';
 
 interface TabPanelProps {
@@ -31,23 +30,10 @@ interface Props {
 }
 
 const InstagramStreamPanels = ({ value, socialAccount }: Props) => {
-	let [currentStream, setCurrentStream] = React.useState<FixMeLater>([]);
-	console.log(socialAccount);
-
-	useEffect(() => {
-		getInstagramFeeds(socialAccount.accountId)
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	});
-
 	return (
 		<>
 			<TabPanel value={value} index={0}>
-				<HomeTimeline />
+				<HomeTimeline socialAccount={socialAccount} />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 				<Schedule />
