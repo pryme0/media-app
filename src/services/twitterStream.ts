@@ -23,6 +23,14 @@ export const getUserFollowing = (accountId: string | number) => {
 	return apiCall('get', `/api/oauth/twitter/friends/${accountId}`);
 };
 
+export const follow = (accountId: string | number, userId: string | number) => {
+	return apiCall('post', `/api/oauth/twitter/follow/${accountId}`, { userId });
+};
+
+export const unFollow = (accountId: string | number, userId: string | number) => {
+	return apiCall('post', `/api/oauth/twitter/unfollow/${accountId}`, { userId });
+};
+
 export const favoriteTweet = (accountId: string | number, tweetStrId: string | number) => {
 	return apiCall('post', `/api/oauth/twitter/create_favorite/${accountId}/${tweetStrId}`);
 };

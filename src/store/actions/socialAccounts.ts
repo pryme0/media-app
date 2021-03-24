@@ -7,8 +7,18 @@ export const getSocialAccounts = () => async (dispatch: Dispatch<Action>) => {
 	try {
 		let { accounts: socialAccounts }: FixMeLater = await apiCall('get', '/api/oauth/accounts/getStreams');
 		return dispatch({ type: LOAD_SOCIAL_ACCOUNTS, socialAccounts });
+		// apiCall('get', '/api/oauth/accounts/getStreams')
+		// 	.then(({ socialAccounts }: FixMeLater) => {
+		// 		return dispatch({ type: LOAD_SOCIAL_ACCOUNTS, socialAccounts });
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log('ERROR ', error);
+		// 		console.log('RESPONSE ', error.response);
+		// 		console.log('MESSAGE ', error.message);
+		// 		console.log('REQUEST ', error.request);
+		// 	});
 	} catch (error) {
-		console.log(error.response);
+		console.log(error);
 	}
 };
 

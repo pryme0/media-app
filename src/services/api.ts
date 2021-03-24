@@ -1,5 +1,4 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
-import Logout from '../containers/Logout';
 
 // Set config defaults when creating the instance
 const instance = axios.create({
@@ -12,8 +11,15 @@ instance.interceptors.response.use(
 		return response;
 	},
 	function (error) {
+		console.log(error);
 		if (error.response.status === 401) {
-			Logout();
+			apiCall('get', 'api/oauth/refreshUserToken')
+				.then((res) => {
+					console.log(res);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 		}
 		return Promise.reject(error.response);
 	}
