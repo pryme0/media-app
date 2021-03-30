@@ -104,7 +104,7 @@ const TabItem = ({ socialAccount, ...props }: ITabProps) => {
 	}
 	return (
 		<StyledTab
-			label={<Label label={socialAccount.account.userName} />}
+			label={<Label label={socialAccount.account.userName || socialAccount.account.name} />}
 			icon={<ProfileImageIcon image={socialAccount.account.profileImg} icon={icon} />}
 			{...a11yProps(socialAccount._id)}
 			{...props}

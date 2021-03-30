@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { FixMeLater } from '../../../../../types';
 import StreamContainer from '../../../StreamContainer';
 import { getInstagramFeeds } from '../../../../../services/instagramStream';
+import { addError, addSuccess } from 'redux-flash-messages';
 import Post from './Post';
 import Loader from '../Loader';
 
@@ -17,7 +18,9 @@ const HomeFeed = ({ socialAccount }: IProps) => {
 		getInstagramFeeds(socialAccount.accountId)
 			.then(({ posts }: FixMeLater) => {
 				if (posts) {
-					setCurrentStream(posts.data);
+					if (posts.error) {
+						if (posts.error.code === 190) addError({ text: 'Error getting data, hint try linking account' });
+					} else setCurrentStream(posts.data);
 					setLoading(false);
 				}
 			})
