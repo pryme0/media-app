@@ -80,9 +80,9 @@ const Timeline = ({
         <Paper elevation={1} className={classes.paper}>
             <div className={classes.container}>
                 {retweeted_status && (
-                    <Typography variant="h4">
-                        <FontAwesomeIcon className="icon" icon={faRetweet} />
-                        SantosBright Reweeted
+                    <Typography className={classes.reweetUserName} variant="h4">
+                        <FontAwesomeIcon className="icon" icon={faRetweet} />{" "}
+                        {name} Reweeted
                     </Typography>
                 )}
                 <Grid container className="tweet-grid">
@@ -102,7 +102,7 @@ const Timeline = ({
                         <Grid container className="user-info-grid">
                             <Grid item>
                                 <Typography className="username" variant="h6">
-                                    {name}
+                                    {retweeted_status?.user?.name ?? name}
                                 </Typography>
                             </Grid>
                             <Grid item>
@@ -110,7 +110,9 @@ const Timeline = ({
                                     className="user-handle"
                                     variant="h6"
                                 >
-                                    @{screen_name}
+                                    @
+                                    {retweeted_status?.user?.screen_name ??
+                                        screen_name}
                                 </Typography>
                             </Grid>
                             <span className="dot">.</span>
