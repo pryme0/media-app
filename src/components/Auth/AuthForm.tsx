@@ -139,8 +139,8 @@ const AuthForm = ({ isSignup }: Props) => {
 						authCallback={twitterAuth}
 						// consumerKey={(process.env as any).REACT_APP_TWITTER_CONSUMER_KEY}
 						// consumerSecret={(process.env as any).REACT_APP_TWITTER_CONSUMER_SECRET}
-						consumerKey="rsZL428YCAylfLCMWalPcq9gj"
-						consumerSecret="VT1YpoG0ZCtEAOCHd2EfOQPn9Bn7m3DbUJolzFXAmlnIzseZrs"
+						consumerKey="dehNS2Y53A2cusFs9zZwAVxKG"
+						consumerSecret="T4XlbhNlCLgyyiY53gUn9LvZKuOpppZwaX2t1y69I6zKmu9NU0"
 						buttonTheme="light_short"
 					/>
 					<FacebookLogin

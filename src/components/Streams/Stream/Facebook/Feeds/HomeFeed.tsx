@@ -3,6 +3,7 @@ import { getFacebookPost } from '../../../../../services/facebookStream';
 import { FixMeLater } from '../../../../../types';
 import StreamContainer from '../../../StreamContainer';
 import { likePost, unLikePost } from '../../../../../services/facebookStream';
+import { addError, addSuccess } from 'redux-flash-messages';
 import Loader from '../Loader';
 import Post from './Post';
 
@@ -66,7 +67,12 @@ const HomeFeed = ({ socialAccount }: IProps) => {
 	useEffect(() => {
 		getFacebookPost(socialAccount.accountId).then((res: FixMeLater) => {
 			setLoading(false);
-			setPosts(res.posts.data);
+			if (res.error) console.log('Code ', res.error.error_subcode, 'Message ', res.error.message, 'Type ', res.error.type);
+
+			if (res.posts.error) {
+				if (res.posts.error.code === 190) addError({ text: 'Password of current account changed. Try relinking account..' });
+				else addError({ text: res.posts.error.message });
+			} else setPosts(res.posts.data);
 		});
 	}, []);
 

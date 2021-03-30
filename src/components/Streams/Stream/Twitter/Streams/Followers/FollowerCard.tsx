@@ -6,12 +6,15 @@ import { FixMeLater } from '../../../../../../types';
 
 interface IProps {
 	user: FixMeLater;
+	followUser: (userId: string | number, fId: number, acctId?: string | number) => void;
+	unFollowUser: (userId: string | number, fId: number, acctId?: string | number) => void;
+	fId: number;
 }
 
-const FollowerCard = ({ user }: IProps) => {
+const FollowerCard = ({ user, followUser, unFollowUser, fId }: IProps) => {
 	const classes = useStyles();
 	const [isUnfollow, setUnfollow] = useState(false);
-	let { name, screen_name, description, following, profile_image_url_https } = user;
+	let { id, name, screen_name, description, following, profile_image_url_https } = user;
 
 	return (
 		<Paper elevation={0} className={classes.paper}>
@@ -47,11 +50,12 @@ const FollowerCard = ({ user }: IProps) => {
 											color="primary"
 											onMouseEnter={() => setUnfollow(true)}
 											onMouseLeave={() => setUnfollow(false)}
+											onClick={() => unFollowUser(id, fId)}
 										>
 											{isUnfollow ? 'Unfollow' : 'Following'}
 										</Button>
 									) : (
-										<Button className="follow-btn" variant="outlined" color="primary">
+										<Button className="follow-btn" variant="outlined" color="primary" onClick={() => followUser(id, fId)}>
 											Follow
 										</Button>
 									)}

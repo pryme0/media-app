@@ -1,29 +1,54 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 
+// Set config defaults when creating the instance
+const instance = axios.create({
+	baseURL: 'https://buzzroom.herokuapp.com',
+});
+
+instance.interceptors.response.use(
+	(response) => {
+		console.log('Intercepting');
+		return response;
+	},
+	function (error) {
+		console.log(error);
+		if (error.response.status === 401) {
+			apiCall('get', 'api/oauth/refreshUserToken')
+				.then((res) => {
+					console.log(res);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
+		return Promise.reject(error.response);
+	}
+);
+
 export function setAuthorizationToken(token: string) {
 	if (token) {
-		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+		instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 	} else {
-		delete axios.defaults.headers.common['Authorization'];
+		delete instance.defaults.headers.common['Authorization'];
 	}
 }
 
 export function setRefreshToken(refreshToken: string) {
 	if (refreshToken) {
-		axios.defaults.headers.common['refresh-token'] = `${refreshToken}`;
+		instance.defaults.headers.common['refresh-token'] = `${refreshToken}`;
 	} else {
-		delete axios.defaults.headers.common['refresh-token'];
+		delete instance.defaults.headers.common['refresh-token'];
 	}
 }
 
 export function deleteTokens() {
-	delete axios.defaults.headers.common['Authorization'];
-	delete axios.defaults.headers.common['refresh-token'];
+	delete instance.defaults.headers.common['Authorization'];
+	delete instance.defaults.headers.common['refresh-token'];
 }
 
 export function apiCall(method: string, path: string, data?: any) {
 	return new Promise((resolve, reject) => {
-		return (axios as any)
+		return (instance as any)
 			[method](path, data)
 			.then((res: AxiosResponse<any>) => {
 				return resolve(res.data);

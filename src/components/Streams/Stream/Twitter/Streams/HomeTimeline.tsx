@@ -22,7 +22,6 @@ const HomeTimeline = ({ socialAccount, currentStream, setCurrentStream, toggleRe
 			.then(({ result }: FixMeLater) => {
 				setLoading(false);
 				setCurrentStream(result);
-				console.log(currentStream);
 			})
 			.catch((error) => {
 				error.message ? console.log(error.message) : console.log(error);
