@@ -17,7 +17,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 	tab: {
 		minWidth: '180px',
-		height: '98%!Important',
+		// height: '98% !Important',
+		height: '4rem !important',
+		whiteSpace: 'inherit',
 		padding: 0,
 		background: '#F6F7FB',
 		border: '1px solid #D8D8D8',

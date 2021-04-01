@@ -59,6 +59,7 @@ const ToolbarMain = (props: IProps) => {
 			</div>
 			<div className={classes.rightContent}>
 				<StyledMenu className={classes.iconButton} />
+
 				<Button variant="contained" className={classes.iconButton} disableElevation>
 					<FontAwesomeIcon icon={faBell} size="2x" />
 				</Button>

@@ -86,6 +86,7 @@ interface ITabProps {
 const TabItem = ({ socialAccount, ...props }: ITabProps) => {
 	const classes = useStyles();
 	let icon;
+
 	switch (socialAccount.account.accountType.toUpperCase()) {
 		case 'TWITTER':
 			icon = faTwitter;
@@ -102,6 +103,7 @@ const TabItem = ({ socialAccount, ...props }: ITabProps) => {
 		default:
 			break;
 	}
+
 	return (
 		<StyledTab
 			label={<Label label={socialAccount.account.userName || socialAccount.account.name} />}

@@ -20,7 +20,7 @@ export default (state: IState = DEFAULT_STATE, action: any) => {
 				user: action?.user,
 			};
 		case LOGOUT: {
-			console.log('Loging out');
+			console.log('Logging out');
 			localStorage.clear();
 			deleteTokens();
 			return { ...state, user: {} };

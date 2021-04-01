@@ -118,16 +118,16 @@ export default function CustomizedMenus(props: { className: string }) {
 			>
 				<Avatar
 					className={classes.avatar}
-					alt={user.firstname + ' ' + user.lastname}
+					alt={user.firstName + ' ' + user.lastName}
 					style={{
 						backgroundColor: '#2F80ED',
 						fontWeight: 'lighter',
 					}}
 					src={user.profileImg ? user.profileImg : null}
 				>
-					{((user.firstname + ' ' + user.lastname) as string)[0].toUpperCase()}
+					{((user.firstName + ' ' + user.lastName) as string)[0].toUpperCase()}
 				</Avatar>
-				{user.firstname + ' ' + user.lastname || 'Santos Bright'}
+				{user.firstName ? user.firstName : user.firstname} {user.lastName ? user.lastName : user.lastname}
 				<FontAwesomeIcon icon={faAngleDown} className={classes.arrow} />
 			</Button>
 			<Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
