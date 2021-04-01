@@ -66,4 +66,10 @@ export default makeStyles((theme) => ({
             },
         },
     },
+    reweetUserName: {
+        fontSize: ".8rem",
+        marginTop: "-.5rem",
+        fontWeight: 600,
+        marginBottom: "1rem",
+    },
 }));
