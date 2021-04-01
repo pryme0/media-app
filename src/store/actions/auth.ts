@@ -10,17 +10,17 @@ export const auth = (formData: FixMeLater, history: FixMeLater, action: string, 
 		const isRemember: boolean = formData.rememberMe;
 		// delete formData.rememberMe;
 		const data: FixMeLater = await apiCall('post', `/api/oauth/${action}`, formData);
-		console.log('DATA ', data);
 		const { accessToken, user, refreshToken } = data;
 
 		if (isRemember || action.toUpperCase() === 'SIGNUP') {
 			localStorage.setItem('accessToken', accessToken);
-			localStorage.setItem('refreshToken', refreshToken);
+			localStorage.setItem('refresh-token', refreshToken);
 		}
 
 		setAuthorizationToken(accessToken);
 		setRefreshToken(refreshToken);
 		dispatch({ type: AUTH, user });
+
 		if (action === 'login')
 			addSuccess({
 				text: `Welcome back ${user.firstname}`,
@@ -28,9 +28,6 @@ export const auth = (formData: FixMeLater, history: FixMeLater, action: string, 
 
 		history.push('/');
 	} catch (error) {
-		console.log('MESSAGE ', error.message);
-		console.log('RESPONSE ', error.response);
-		console.log('REQUEST ', error.request.response.error);
 		actions.setSubmitting(false);
 		addError({
 			text: error.error,

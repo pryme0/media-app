@@ -1,4 +1,5 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
+import { FixMeLater } from '../types';
 
 // Set config defaults when creating the instance
 const instance = axios.create({
@@ -12,10 +13,12 @@ instance.interceptors.response.use(
 	},
 	function (error) {
 		console.log(error);
-		if (error.response.status === 401) {
-			apiCall('get', 'api/oauth/refreshUserToken')
-				.then((res) => {
-					console.log(res);
+		if (error.response === 401 || error.response.status === 401) {
+			setRefreshToken();
+			removeAuthHeader();
+			apiCall('get', '/api/oauth/refreshUserToken')
+				.then((res: FixMeLater) => {
+					setAuthorizationToken(res.token);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -25,25 +28,47 @@ instance.interceptors.response.use(
 	}
 );
 
-export function setAuthorizationToken(token: string) {
+export function setAuthorizationToken(token: string | null) {
 	if (token) {
+		removeAuthHeader();
 		instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+		localStorage.setItem('Authorization', `${token}`);
 	} else {
-		delete instance.defaults.headers.common['Authorization'];
+		removeAuthHeader();
 	}
 }
 
-export function setRefreshToken(refreshToken: string) {
+export function setRefreshToken(refreshToken?: string | null) {
 	if (refreshToken) {
-		instance.defaults.headers.common['refresh-token'] = `${refreshToken}`;
+		removeRefreshToken();
+		instance.defaults.headers.common['refresh-token'] = `Bearer ${refreshToken}`;
+		localStorage.setItem('refresh-token', `${refreshToken}`);
 	} else {
-		delete instance.defaults.headers.common['refresh-token'];
+		if (localStorage.getItem('refresh-token')) {
+			let refreshToken = localStorage.getItem('refresh-token');
+			instance.defaults.headers.common['refresh-token'] = `Bearer ${refreshToken}`;
+		} else {
+			removeRefreshToken();
+		}
 	}
 }
 
 export function deleteTokens() {
 	delete instance.defaults.headers.common['Authorization'];
 	delete instance.defaults.headers.common['refresh-token'];
+	localStorage.clear();
+}
+
+export function removeAuthHeader() {
+	delete instance.defaults.headers.common['Authorization'];
+	localStorage.removeItem('Authorization');
+	console.log('Removed Auth Header');
+}
+
+export function removeRefreshToken() {
+	delete instance.defaults.headers.common['refresh-token'];
+	localStorage.removeItem('refresh-token');
+	console.log('Removed refresh token');
 }
 
 export function apiCall(method: string, path: string, data?: any) {
