@@ -50,7 +50,6 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 			destroyFavorite(socialAccount.accountId, tweetStrId)
 				.then(async ({ result }: FixMeLater) => {
 					let newStream = await unFavoriteResponse(currentStream, tweetStrId);
-
 					setCurrentStream(newStream);
 					updateCacheData(socialAccount.accountId, newStream);
 				})
