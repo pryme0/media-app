@@ -1,9 +1,34 @@
 import { string } from 'yup/lib/locale';
+import LocalBase from 'localbase';
 import { FixMeLater } from '../types';
-import { apiCall } from './api';
+import { apiCall, getAccountId } from './api';
 
-export const getHomeStream = (accountId: string | number) => {
-	return apiCall('get', `/api/oauth/twitter/home_timeline/${accountId}`);
+let db = new LocalBase('buzzroom');
+
+export const cacheData = async (accountId: string | number, collection: string, method: string, url: string) => {
+	let store: FixMeLater = await apiCall(method, url);
+	db.collection(accountId).set(store.result);
+};
+
+export const updateCacheData = (accountId: string | number, data: FixMeLater) => {
+	db.collection(accountId).set(data);
+};
+
+export const getHomeStream = async (accountId: string | number) => {
+	let timeline: any[] = [];
+	let cache = await db
+		.collection(accountId)
+		.get()
+		.then((data: FixMeLater) => {
+			timeline = data;
+			return data.length;
+		});
+
+	if (cache > 0) return { result: timeline };
+	else {
+		cacheData(accountId, 'home_timeline', 'get', `/api/oauth/twitter/home_timeline/${accountId}`);
+		return apiCall('get', `/api/oauth/twitter/home_timeline/${accountId}`);
+	}
 };
 
 export const getUserTimeline = (accountId: string | number) => {

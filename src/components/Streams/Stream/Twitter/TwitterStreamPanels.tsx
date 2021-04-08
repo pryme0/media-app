@@ -14,6 +14,7 @@ import {
 	unFavoriteResponse,
 	unRetweetResponse,
 	retweetResponse,
+	updateCacheData,
 } from '../../../../services/twitterStream';
 
 interface TabPanelProps {
@@ -48,13 +49,10 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 		if (favorited) {
 			destroyFavorite(socialAccount.accountId, tweetStrId)
 				.then(async ({ result }: FixMeLater) => {
-					let newStream;
-					if (result) {
-						newStream = currentStream.map((tweet: FixMeLater) => (tweet.id === result.id ? result : tweet));
-					} else {
-						newStream = await unFavoriteResponse(currentStream, tweetStrId);
-					}
+					let newStream = await unFavoriteResponse(currentStream, tweetStrId);
+
 					setCurrentStream(newStream);
+					updateCacheData(socialAccount.accountId, newStream);
 				})
 				.catch((error) => {
 					error.message ? console.log(error.response) : console.log(error);
@@ -62,13 +60,9 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 		} else {
 			favoriteTweet(socialAccount.accountId, tweetStrId)
 				.then(async ({ result }: FixMeLater) => {
-					let newStream;
-					if (result) {
-						newStream = currentStream.map((tweet: FixMeLater) => (tweet.id === result.id ? result : tweet));
-					} else {
-						newStream = await favoriteResponse(currentStream, tweetStrId);
-					}
+					let newStream = await favoriteResponse(currentStream, tweetStrId);
 					setCurrentStream(newStream);
+					updateCacheData(socialAccount.accountId, newStream);
 				})
 				.catch((error) => {
 					console.log(error);
@@ -83,6 +77,7 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 				.then(async ({ result }: FixMeLater) => {
 					let newStream = await unRetweetResponse(currentStream, tweetStrId);
 					setCurrentStream(newStream);
+					updateCacheData(socialAccount.accountId, newStream);
 				})
 				.catch((error) => {
 					error.message ? console.log(error.message) : console.log(error);
@@ -92,6 +87,7 @@ const TwitterStreamPanels = ({ value, socialAccount }: Props) => {
 				.then(async ({ result }: FixMeLater) => {
 					let newStream = await retweetResponse(currentStream, tweetStrId);
 					setCurrentStream(newStream);
+					updateCacheData(socialAccount.accountId, newStream);
 				})
 				.catch((error) => {
 					console.log(error);

@@ -18,14 +18,12 @@ const HomeTimeline = ({ socialAccount, currentStream, setCurrentStream, toggleRe
 	let [loading, setLoading] = React.useState<boolean>(true);
 
 	useEffect(() => {
-		getHomeStream(socialAccount.accountId)
-			.then(({ result }: FixMeLater) => {
-				setLoading(false);
-				setCurrentStream(result);
-			})
-			.catch((error) => {
-				error.message ? console.log(error.message) : console.log(error);
-			});
+		async function homeStream() {
+			let { result }: FixMeLater = await getHomeStream(socialAccount.accountId);
+			setLoading(false);
+			setCurrentStream(result);
+		}
+		homeStream();
 	}, []);
 
 	return (

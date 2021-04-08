@@ -1,4 +1,7 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
+import { Console } from 'console';
+import { request } from 'http';
+// import { openDB, deleteDB, wrap, unwrap } from 'idb';
 import { FixMeLater } from '../types';
 
 // Set config defaults when creating the instance
@@ -6,9 +9,18 @@ const instance = axios.create({
 	baseURL: 'https://buzzroom.herokuapp.com',
 });
 
+instance.interceptors.request.use(
+	function (request) {
+		return request;
+	},
+	function (error) {
+		return Promise.reject(error);
+	}
+);
+
 instance.interceptors.response.use(
 	(response) => {
-		console.log('Intercepting');
+		console.log('Intercepting', response);
 		return response;
 	},
 	function (error) {
@@ -82,4 +94,18 @@ export function apiCall(method: string, path: string, data?: any) {
 				return reject(err);
 			});
 	});
+}
+
+export function getAccountType(url: string | undefined) {
+	if (url) {
+		let arr = url.split('/');
+		if (arr[3]) return arr[3].toUpperCase();
+	}
+}
+
+export function getAccountId(url: string | undefined) {
+	if (url) {
+		let arr = url.split('/');
+		if (arr[5]) return arr[5].toUpperCase();
+	}
 }
