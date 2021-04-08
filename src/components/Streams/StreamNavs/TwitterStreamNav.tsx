@@ -7,13 +7,13 @@ import { useStyles } from './styles/StreamNav.styles';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 const links = [
-	{ icon: faHome, text: 'Home', index: 'home-feeds' },
+	{ icon: faHome, text: 'Home Timeline', index: 'home-feeds' },
 	{ icon: faTwitter, text: 'Mentions', index: '/' },
 	{ icon: faEnvelopeOpenText, text: 'Messages', index: '/' },
 	{ icon: faPeopleArrows, text: 'Followers', index: '/' },
-	{ icon: faQuidditch, text: 'User', index: '/' },
-	{ icon: faRetweet, text: 'Retweets', index: '/' },
-	{ icon: faClock, text: 'Schedule', index: '/' },
+	{ icon: faQuidditch, text: 'User Timeline', index: '/' },
+	// { icon: faRetweet, text: 'Retweets', index: '/' },
+	// { icon: faClock, text: 'Schedule', index: '/' },
 ];
 
 function a11yProps(index: any) {
