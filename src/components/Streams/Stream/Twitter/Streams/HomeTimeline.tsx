@@ -27,7 +27,13 @@ const HomeTimeline = ({ socialAccount, currentStream, setCurrentStream, toggleRe
 	}, []);
 
 	return (
-		<StreamContainer>
+		<StreamContainer
+			stream={'Home Timeline'}
+			accountId={socialAccount.accountId}
+			url={`/twitter/home_timeline/${socialAccount.accountId}`}
+			setCurrentStream={setCurrentStream}
+			setLoading={setLoading}
+		>
 			{loading ? (
 				<Loader />
 			) : (

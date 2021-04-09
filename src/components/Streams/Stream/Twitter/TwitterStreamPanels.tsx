@@ -14,8 +14,8 @@ import {
 	unFavoriteResponse,
 	unRetweetResponse,
 	retweetResponse,
-	updateCacheData,
 } from '../../../../services/twitterStream';
+import { updateCacheData } from '../../../../services/utils';
 
 interface TabPanelProps {
 	children?: React.ReactNode;

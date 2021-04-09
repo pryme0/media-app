@@ -2,17 +2,9 @@ import { string } from 'yup/lib/locale';
 import LocalBase from 'localbase';
 import { FixMeLater } from '../types';
 import { apiCall, getAccountId } from './api';
+import { updateCacheData, cacheData } from './utils';
 
 let db = new LocalBase('buzzroom');
-
-export const cacheData = async (accountId: string | number, collection: string, method: string, url: string) => {
-	let store: FixMeLater = await apiCall(method, url);
-	db.collection(accountId).set(store.result);
-};
-
-export const updateCacheData = (accountId: string | number, data: FixMeLater) => {
-	db.collection(accountId).set(data);
-};
 
 export const getHomeStream = async (accountId: string | number) => {
 	let timeline: any[] = [];

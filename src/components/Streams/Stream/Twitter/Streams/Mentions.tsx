@@ -29,7 +29,13 @@ const Mentions = ({ socialAccount, currentStream, setCurrentStream, toggleRetwee
 	}, []);
 
 	return (
-		<StreamContainer>
+		<StreamContainer
+			stream={'User Mentions'}
+			accountId={socialAccount.accountId}
+			url={`/twitter/mention_timeline/${socialAccount.userName}`}
+			setCurrentStream={setCurrentStream}
+			setLoading={setLoading}
+		>
 			{loading ? (
 				<Loader />
 			) : currentStream ? (

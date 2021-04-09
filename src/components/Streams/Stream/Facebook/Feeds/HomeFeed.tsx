@@ -14,6 +14,7 @@ interface IProps {
 const HomeFeed = ({ socialAccount }: IProps) => {
 	let [posts, setPosts] = useState<FixMeLater[]>([]);
 	let [loading, setLoading] = React.useState<boolean>(true);
+
 	const togglePostLike = (postId: string | number, hasLike: boolean) => {
 		if (hasLike) {
 			unLikePost(postId)
@@ -77,8 +78,14 @@ const HomeFeed = ({ socialAccount }: IProps) => {
 	}, []);
 
 	return (
-		<StreamContainer>
-			{loading ? <Loader /> : posts && posts.map((post: FixMeLater) => <Post post={post} togglePostLike={togglePostLike} />)}{' '}
+		<StreamContainer
+			stream={'Home Feed'}
+			accountId={socialAccount.accountId}
+			url={`/facebook/getPagePosts/${socialAccount.accountId}`}
+			setCurrentStream={setPosts}
+			setLoading={setLoading}
+		>
+			{loading ? <Loader /> : posts && posts.map((post: FixMeLater) => <Post post={post} togglePostLike={togglePostLike} />)}
 		</StreamContainer>
 	);
 };
