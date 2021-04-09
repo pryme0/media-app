@@ -29,7 +29,17 @@ const HomeFeed = ({ socialAccount }: IProps) => {
 			});
 	}, []);
 
-	return <StreamContainer>{loading ? <Loader /> : currentStream.map((stream: FixMeLater) => <Post stream={stream} />)}</StreamContainer>;
+	return (
+		<StreamContainer
+			stream={'Home Feed'}
+			accountId={socialAccount.accountId}
+			url={`/instagram/getUserPosts/${socialAccount.accountId}`}
+			setCurrentStream={setCurrentStream}
+			setLoading={setLoading}
+		>
+			{loading ? <Loader /> : currentStream.map((stream: FixMeLater) => <Post stream={stream} />)}
+		</StreamContainer>
+	);
 };
 
 export default HomeFeed;
