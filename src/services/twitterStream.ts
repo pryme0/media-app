@@ -18,7 +18,7 @@ export const getHomeStream = async (accountId: string | number) => {
 
 	if (cache > 0) return { result: timeline };
 	else {
-		cacheData(accountId, 'home_timeline', 'get', `/api/oauth/twitter/home_timeline/${accountId}`);
+		// cacheData(accountId, 'home_timeline', 'get', `/api/oauth/twitter/home_timeline/${accountId}`);
 		return apiCall('get', `/api/oauth/twitter/home_timeline/${accountId}`);
 	}
 };

@@ -3,6 +3,7 @@ import { Console } from 'console';
 import { request } from 'http';
 // import { openDB, deleteDB, wrap, unwrap } from 'idb';
 import { FixMeLater } from '../types';
+import { updateCacheData, cacheData } from './utils';
 
 // Set config defaults when creating the instance
 const instance = axios.create({
@@ -19,8 +20,18 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(
-	(response) => {
+	(response: FixMeLater) => {
 		console.log('Intercepting', response);
+		let uri = response.config.url?.split('/');
+		if (uri.length >= 5) {
+			if (uri[3] === 'twitter' && uri[4] === 'home_timeline') {
+				console.log('TWITTER ', response.data.result);
+				cacheData(uri[5], uri[4], { result: response.data.result });
+			}
+			if (uri[3] === 'facebook' && uri[4] === 'getPagePosts') {
+				cacheData(uri[5], uri[4], { result: response.data.posts.data });
+			}
+		}
 		return response;
 	},
 	function (error) {

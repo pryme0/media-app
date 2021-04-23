@@ -27,9 +27,8 @@ export const debounce = (func: any, wait: number, immediate?: boolean) => {
 	};
 };
 
-export const cacheData = async (accountId: string | number, collection: string, method: string, url: string) => {
-	let store: FixMeLater = await apiCall(method, url);
-	db.collection(accountId).set(store.result);
+export const cacheData = async (accountId: string | number, collection: string, data: FixMeLater) => {
+	db.collection(accountId).set(data.result);
 };
 
 export const updateCacheData = async (accountId: string | number, data: FixMeLater) => {
