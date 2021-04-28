@@ -54,6 +54,7 @@ const StreamContainer = ({ children, stream, accountId, url, setCurrentStream, s
 	const clearCache = () => {
 		setLoading(true);
 		getCacheData(accountId, url).then((res) => {
+			debugger
 			setCurrentStream(res);
 			setLoading(false);
 		});

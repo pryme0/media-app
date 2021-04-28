@@ -37,7 +37,9 @@ export const updateCacheData = async (accountId: string | number, data: FixMeLat
 
 export const clearCacheData = async (accountId: string | number, url: string) => {
 	let store: FixMeLater = await apiCall('get', `/api/oauth${url}`);
-	await db.collection(accountId).set(store.result);
+	debugger;
+	if (url.includes('twitter')) await db.collection(accountId).set(store.result);
+	if (url.includes('facebook')) await db.collection(accountId).set(store.posts);
 };
 
 export const getCacheData = async (accountId: string | number, url: string) => {
